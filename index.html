@@ -1,0 +1,76 @@
+<html>
+  <head>
+    <title>Loading</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      .show {
+        display: block;
+      }
+      .hide {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="show">
+            <h1>Paste to continue</h1>
+          </div>
+          <div class="hide">
+            <h1>Redirecting</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      let domainList = {
+        im: 'https://www.internetmedicin.se/?s=',
+        internetmedicin: 'https://www.internetmedicin.se/?s=',
+        pm: 'https://www.praktiskmedicin.se/?s=',
+        praktiskmedicin: 'https://www.praktiskmedicin.se/?s=',
+        fass: 'https://www.fass.se/LIF/result?&userType=0&query='
+      }
+      document.addEventListener('DOMContentLoaded', function () {
+        let url
+        //set title to "Ready" using vanilla js
+        document.title = 'Ready'
+        function handlePaste (e) {
+          var clipboardData, pastedData
+          e.stopPropagation()
+          e.preventDefault()
+          clipboardData = e.clipboardData || window.clipboardData
+          pastedData = clipboardData.getData('Text')
+          console.log('Pasted: ' + pastedData)
+          if (pastedData && url) {
+            document.title = 'Redirecting'
+            url = url + pastedData
+            //redirect to url
+            window.location.href = url
+          }
+        }
+        //add event listener to the body
+        document.addEventListener('paste', handlePaste)
+        //get url parameters
+        var urlParams = new URLSearchParams(window.location.search)
+        //get the url parameter
+        var site = urlParams.get('site')
+        var lang = urlParams.get('lang')
+        //if the url parameter is not empty
+        if (site) {
+          console.log('site param: ' + site)
+          //if the url parameter is in the domainList
+          if (domainList[site]) {
+            url = domainList[site]
+          } else if (site.startsWith('http')) {
+            url = site
+          }
+        } else {
+          console.error('site param is empty')
+        }
+      })
+    </script>
+  </body>
+</html>
