@@ -3,28 +3,8 @@
     <title>Loading</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <style>
-      .show {
-        display: block;
-      }
-      .hide {
-        display: none;
-      }
-    </style>
   </head>
   <body>
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="hide">
-            <h1>Paste to continue</h1>
-          </div>
-          <div class="hide">
-            <h1>Redirecting</h1>
-          </div>
-        </div>
-      </div>
-    </div>
     <script>
       let domainList = {
         im: {
@@ -148,7 +128,6 @@
           console.error('site param is empty')
         }
         document.title = 'DMOhelper Ready'
-        // function that receives string and language code and translates it into english
       })
       function translateQuery (text, sourcelang, translationlang) {
         let translationurl = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sourcelang}&tl=${translationlang}&dt=t&q=${text}`
