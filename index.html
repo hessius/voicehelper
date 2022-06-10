@@ -78,47 +78,25 @@
           lang: 'sv'
         },
         icd: {
-          url: 'https://ekg.nu/icd-10-sok/?_searchicd=',
-          name: 'ICD 10 - Ekg.nu',
+          url: 'http://icd.internetmedicin.se/',
+          name: 'ICD.nu',
           lang: 'sv'
         }
       }
-      let url, translate, slang, tlang
+      let url, translate, slang, tlang, name, site
       document.addEventListener('DOMContentLoaded', function () {
-        function handlePaste (e) {
-          var clipboardData, pastedData
-          e.stopPropagation()
-          e.preventDefault()
-          clipboardData = e.clipboardData || window.clipboardData
-          pastedData = clipboardData.getData('Text')
-          console.log('Pasted: ' + pastedData)
-          if (pastedData && url) {
-            document.title = 'Redirecting'
-
-            if (translate) {
-              console.log('Translating')
-              console.log(pastedData)
-              console.log(slang)
-              console.log(tlang)
-              translateQuery(pastedData, slang, tlang)
-            } else {
-              url = url + pastedData
-              window.location.href = url
-            }
-          }
-        }
-        document.addEventListener('paste', handlePaste)
         let urlParams = new URLSearchParams(window.location.search)
-        let site = urlParams.get('site')
-        let lang = urlParams.get('lang')
+        site = urlParams.get('site')
+        slang = urlParams.get('lang')
+        document.addEventListener('paste', handlePaste)
         if (site) {
-          console.log('site param: ' + site)
           if (domainList[site]) {
             url = domainList[site].url
+            name = domainList[site].name
             if (
               domainList[site].lang &&
-              lang &&
-              domainList[site].lang !== lang
+              slang &&
+              domainList[site].lang !== slang
             ) {
               translate = true
               slang = lang
@@ -143,6 +121,28 @@
             url = url + translatedText
             window.location.href = url
           })
+      }
+      function handlePaste (e) {
+        var clipboardData, pastedData
+        e.stopPropagation()
+        e.preventDefault()
+        clipboardData = e.clipboardData || window.clipboardData
+        pastedData = clipboardData.getData('Text')
+        console.log('Pasted: ' + pastedData)
+        if (pastedData && url) {
+          document.title = `Redirecting to ${name}`
+
+          if (translate) {
+            console.log('Translating')
+            console.log(pastedData)
+            console.log(slang)
+            console.log(tlang)
+            translateQuery(pastedData, slang, tlang)
+          } else {
+            url = url + pastedData
+            window.location.href = url
+          }
+        }
       }
     </script>
   </body>
