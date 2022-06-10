@@ -27,27 +27,79 @@
     </div>
     <script>
       let domainList = {
-        im: 'https://www.internetmedicin.se/?s=',
-        internetmedicin: 'https://www.internetmedicin.se/?s=',
-        pm: 'https://www.praktiskmedicin.se/?s=',
-        praktiskmedicin: 'https://www.praktiskmedicin.se/?s=',
-        fass: 'https://www.fass.se/LIF/result?&userType=0&query=',
-        u2d: 'https://www.uptodate.com/contents/search?search=',
-        utd: 'https://www.uptodate.com/contents/search?search=',
-        uptodate: 'https://www.uptodate.com/contents/search?search=',
-        google: 'https://www.google.com/search?q=',
-        g: 'https://www.google.com/search?q=',
-        ji: 'https://janusinfo.se/ovrigt/sokresultat.html?query=',
-        janusinfo: 'https://janusinfo.se/ovrigt/sokresultat.html?query=',
-        lmb:
-          'https://lakemedelsboken.se/?iso=true&imo=false&nplId=null&search=',
-        lakemedelsboken:
-          'https://lakemedelsboken.se/?iso=true&imo=false&nplId=null&search='
+        im: {
+          url: 'https://www.internetmedicin.se/?s=',
+          name: 'Internet Medicin',
+          lang: 'sv'
+        },
+        internetmedicin: {
+          url: 'https://www.internetmedicin.se/?s=',
+          name: 'Internet Medicin',
+          lang: 'sv'
+        },
+        pm: {
+          url: 'https://www.praktiskmedicin.se/?s=',
+          name: 'Praktisk Medicin',
+          lang: 'sv'
+        },
+        praktiskmedicin: {
+          url: 'https://www.praktiskmedicin.se/?s=',
+          name: 'Praktisk Medicin',
+          lang: 'sv'
+        },
+        fass: {
+          url: 'https://www.fass.se/LIF/result?&userType=0&query=',
+          name: 'FASS',
+          lang: 'sv'
+        },
+        u2d: {
+          url: 'https://www.uptodate.com/contents/search?search=',
+          name: 'Uptodate',
+          lang: 'en'
+        },
+        utd: {
+          url: 'https://www.uptodate.com/contents/search?search=',
+          name: 'Uptodate',
+          lang: 'en'
+        },
+        uptodate: {
+          url: 'https://www.uptodate.com/contents/search?search=',
+          name: 'Uptodate',
+          lang: 'en'
+        },
+        google: {
+          url: 'https://www.google.com/search?q=',
+          name: 'Google'
+        },
+        g: {
+          url: 'https://www.google.com/search?q=',
+          name: 'Google'
+        },
+        ji: {
+          url: 'https://janusinfo.se/ovrigt/sokresultat.html?query=',
+          name: 'JanusInfo',
+          lang: 'sv'
+        },
+        janusinfo: {
+          url: 'https://janusinfo.se/ovrigt/sokresultat.html?query=',
+          name: 'JanusInfo',
+          lang: 'sv'
+        },
+        lmb: {
+          url:
+            'https://lakemedelsboken.se/?iso=true&imo=false&nplId=null&search=',
+          name: 'Lakemedelsboken',
+          lang: 'sv'
+        },
+        lakemedelsboken: {
+          url:
+            'https://lakemedelsboken.se/?iso=true&imo=false&nplId=null&search=',
+          name: 'Lakemedelsboken',
+          lang: 'sv'
+        }
       }
+      let url, translate, slang, tlang
       document.addEventListener('DOMContentLoaded', function () {
-        let url
-        //set title to "Ready" using vanilla js
-        document.title = 'Ready'
         function handlePaste (e) {
           var clipboardData, pastedData
           e.stopPropagation()
@@ -57,31 +109,57 @@
           console.log('Pasted: ' + pastedData)
           if (pastedData && url) {
             document.title = 'Redirecting'
-            url = url + pastedData
-            //redirect to url
-            window.location.href = url
+
+            if (translate) {
+              console.log('Translating')
+              console.log(pastedData)
+              console.log(slang)
+              console.log(tlang)
+              translateQuery(pastedData, slang, tlang)
+            } else {
+              url = url + pastedData
+              window.location.href = url
+            }
           }
         }
-        //add event listener to the body
         document.addEventListener('paste', handlePaste)
-        //get url parameters
-        var urlParams = new URLSearchParams(window.location.search)
-        //get the url parameter
-        var site = urlParams.get('site')
-        var lang = urlParams.get('lang')
-        //if the url parameter is not empty
+        let urlParams = new URLSearchParams(window.location.search)
+        let site = urlParams.get('site')
+        let lang = urlParams.get('lang')
         if (site) {
           console.log('site param: ' + site)
-          //if the url parameter is in the domainList
           if (domainList[site]) {
-            url = domainList[site]
+            url = domainList[site].url
+            if (
+              domainList[site].lang &&
+              lang &&
+              domainList[site].lang !== lang
+            ) {
+              translate = true
+              slang = lang
+              tlang = domainList[site].lang
+            } else {
+              translate = false
+            }
           } else if (site.startsWith('http')) {
             url = site
           }
         } else {
           console.error('site param is empty')
         }
+        document.title = 'DMOhelper Ready'
+        // function that receives string and language code and translates it into english
       })
+      function translateQuery (text, sourcelang, translationlang) {
+        let translationurl = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sourcelang}&tl=${translationlang}&dt=t&q=${text}`
+        fetch(translationurl)
+          .then(response => response.json())
+          .then(data => {
+            let translatedText = data[0][0][0]
+            url = url + translatedText
+            window.location.href = url
+          })
+      }
     </script>
   </body>
 </html>
