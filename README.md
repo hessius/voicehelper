@@ -36,7 +36,7 @@ Currently two parameters are available
 1. Site (Required)
    Accepts either one of the predefined domains (see below) or a full url, please note that the url needed is the full search URL to which a query can be appended. e.g. "https://www.bing.com/search?q="
 2. Lang (optional)
-   Accepts any two letter language code ([ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)), e.g. "en" for English and "se" for Swedish. Is used to enable automatic translation of query for searches in a resource in another language than the source.
+   Accepts any two letter language code ([ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)), e.g. "en" for English and "sv" for Swedish. Is used to enable automatic translation of query for searches in a resource in another language than the source.
 
 ### Predefined domains
 
