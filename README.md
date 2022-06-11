@@ -23,15 +23,22 @@ An additional feature to note is the ability to translate text strings so that e
 
 1. Create a new step by step command "search X" (X being the database)
 2. Add the commands:
-   a. Keyboard shortcut: Ctrl-C
-   b. Run program: Web browser of choice (e.g. Edge) with the argument https://hessius.github.io/dmohelper/?site=[INSERT SITE HERE]&lang=[INSERT LANGUANGE HERE (OPTIONAL)]
-   c. Wait: e.g. 3000 ms to let the browser load, the website is minimal enough to load nearly instantaneously
-   d. Keyboard shortcut: Ctrl-V
+   - Keyboard shortcut: Ctrl-C
+   - Run program: Web browser of choice (e.g. Edge) with the argument https://hessius.github.io/dmohelper/?site=[INSERT SITE HERE]&lang=[INSERT LANGUANGE HERE (OPTIONAL)]
+   - Wait: e.g. 3000 ms to let the browser load, the website is minimal enough to load nearly instantaneously
+   - Keyboard shortcut: Ctrl-V
 3. Invoke the shortcut by saying "Select [TEXT]" and then "Search X"
 
 ## Parameters
 
-### Sites
+Currently two parameters are available
+
+1. Site (Required)
+   Accepts either one of the predefined domains (see below) or a full url, please note that the url needed is the full search URL to which a query can be appended. e.g. "https://www.bing.com/search?q="
+2. Lang (optional)
+   Accepts any two letter language code ([ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)), e.g. "en" for English and "se" for Swedish. Is used to enable automatic translation of query for searches in a resource in another language than the source.
+
+### Predefined domains
 
 | Name             | Param | Param alt       | Param alt 2 | Description                                                                         | Language |
 | ---------------- | ----- | --------------- | ----------- | ----------------------------------------------------------------------------------- | -------- |
@@ -42,5 +49,11 @@ An additional feature to note is the ability to translate text strings so that e
 | Internetmedicin  | im    | internetmedicin |             | Swedish equivalent of Uptodate                                                      | Swedish  |
 | Janusinfo        | ji    | janusinfo       |             | Swedish National collection of emergency medicine resources and pharmaceutical info | Swedish  |
 | Läkemedelsboken  | lmb   | lakemedelsboken |             | Pharmaceutical guidelines                                                           | Swedish  |
+| MD Calc          | mdc   | mdcalc          |             | Clinical calculators                                                                | English  |
 | Praktisk medicin | pm    | praktiskmedicin |             | Large collection of medical information for primary care                            | Swedish  |
 | Uptodate         | u2d   | utd             | uptodate    | Large collection of medical information                                             | English  |
+
+## Other info
+
+- This tool was developed by [Jesper Hessius](https://github.com/hessius).
+- If you have any other resources you want added reach out through [first name].[surname]@nuance.com.

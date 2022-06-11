@@ -1,3 +1,4 @@
+<!-- DOCUMENTATION AVAILABLE @ /readme.html-->
 <html>
   <head>
     <title>Loading</title>
@@ -7,6 +8,33 @@
   <body>
     <script>
       let domainList = {
+        // Note: Domains should be listed in alphabetical order.
+        bing: {
+          url: 'https://www.bing.com/search?q=',
+          name: 'Bing'
+        },
+        b: {
+          url: 'https://www.bing.com/search?q=',
+          name: 'Bing'
+        },
+        fass: {
+          url: 'https://www.fass.se/LIF/result?&userType=0&query=',
+          name: 'FASS',
+          lang: 'sv'
+        },
+        g: {
+          url: 'https://www.google.com/search?q=',
+          name: 'Google'
+        },
+        google: {
+          url: 'https://www.google.com/search?q=',
+          name: 'Google'
+        },
+        icd: {
+          url: 'http://icd.internetmedicin.se/',
+          name: 'ICD.nu',
+          lang: 'sv'
+        },
         im: {
           url: 'https://www.internetmedicin.se/?s=',
           name: 'Internet Medicin',
@@ -16,44 +44,6 @@
           url: 'https://www.internetmedicin.se/?s=',
           name: 'Internet Medicin',
           lang: 'sv'
-        },
-        pm: {
-          url: 'https://www.praktiskmedicin.se/?s=',
-          name: 'Praktisk Medicin',
-          lang: 'sv'
-        },
-        praktiskmedicin: {
-          url: 'https://www.praktiskmedicin.se/?s=',
-          name: 'Praktisk Medicin',
-          lang: 'sv'
-        },
-        fass: {
-          url: 'https://www.fass.se/LIF/result?&userType=0&query=',
-          name: 'FASS',
-          lang: 'sv'
-        },
-        u2d: {
-          url: 'https://www.uptodate.com/contents/search?search=',
-          name: 'Uptodate',
-          lang: 'en'
-        },
-        utd: {
-          url: 'https://www.uptodate.com/contents/search?search=',
-          name: 'Uptodate',
-          lang: 'en'
-        },
-        uptodate: {
-          url: 'https://www.uptodate.com/contents/search?search=',
-          name: 'Uptodate',
-          lang: 'en'
-        },
-        google: {
-          url: 'https://www.google.com/search?q=',
-          name: 'Google'
-        },
-        g: {
-          url: 'https://www.google.com/search?q=',
-          name: 'Google'
         },
         ji: {
           url: 'https://janusinfo.se/ovrigt/sokresultat.html?query=',
@@ -65,22 +55,52 @@
           name: 'JanusInfo',
           lang: 'sv'
         },
-        lmb: {
-          url:
-            'https://lakemedelsboken.se/?iso=true&imo=false&nplId=null&search=',
-          name: 'Lakemedelsboken',
-          lang: 'sv'
-        },
         lakemedelsboken: {
           url:
             'https://lakemedelsboken.se/?iso=true&imo=false&nplId=null&search=',
           name: 'Lakemedelsboken',
           lang: 'sv'
         },
-        icd: {
-          url: 'http://icd.internetmedicin.se/',
-          name: 'ICD.nu',
+        lmb: {
+          url:
+            'https://lakemedelsboken.se/?iso=true&imo=false&nplId=null&search=',
+          name: 'Lakemedelsboken',
           lang: 'sv'
+        },
+        mdc: {
+          url: 'https://www.mdcalc.com/search?s=',
+          name: 'MD Calc',
+          lang: 'en'
+        },
+        mdcalc: {
+          url: 'https://www.mdcalc.com/search?s=',
+          name: 'MD Calc',
+          lang: 'en'
+        },
+        pm: {
+          url: 'https://www.praktiskmedicin.se/?s=',
+          name: 'Praktisk Medicin',
+          lang: 'sv'
+        },
+        praktiskmedicin: {
+          url: 'https://www.praktiskmedicin.se/?s=',
+          name: 'Praktisk Medicin',
+          lang: 'sv'
+        },
+        u2d: {
+          url: 'https://www.uptodate.com/contents/search?search=',
+          name: 'Uptodate',
+          lang: 'en'
+        },
+        uptodate: {
+          url: 'https://www.uptodate.com/contents/search?search=',
+          name: 'Uptodate',
+          lang: 'en'
+        },
+        utd: {
+          url: 'https://www.uptodate.com/contents/search?search=',
+          name: 'Uptodate',
+          lang: 'en'
         }
       }
       let url, translate, slang, tlang, name, site
@@ -127,7 +147,7 @@
         e.stopPropagation()
         e.preventDefault()
         clipboardData = e.clipboardData || window.clipboardData
-        pastedData = clipboardData.getData('Text')
+        pastedData = clipboardData.getData('Text').toLowerCase()
         console.log('Pasted: ' + pastedData)
         if (pastedData && url) {
           document.title = `Redirecting to ${name}`
