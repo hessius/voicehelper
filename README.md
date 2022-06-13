@@ -7,7 +7,8 @@
    4. [How to use with DMO](#how-to-use-with-dmo)
    5. [Parameters](#parameters)
       1. [Predefined domains](#predefined-domains)
-   6. [Other info](#other-info)
+   6. [Examples](#examples)
+   7. [Other info](#other-info)
 
 ## What is This?
 
@@ -21,10 +22,12 @@ When executing step by step commands that go beyond the EHR, specifically to int
 
 By design this service contains no UI, this is in order to be basically invisible to the end user - it should "just work".
 The service takes arguments from two fronts:
-a) in the form of URL search params e.g. domain.com?foo=bar
-b) from pasted text
 
-When accessing this page with a url param (see below for options) specifying a site that either matches a predefined search engine or is a url the service can receive pasted text. The input from the URL parameters and the pasted text is combined to generate a complete search URL, to which the user is redirected. While the process might sound complex this happens (almost) instantaneously and is (almost) invisible to the user.
+**a)** in the form of URL search params e.g. domain.com?foo=bar
+
+**b)** from pasted text
+
+To use the service, when accessing this page you need to to provide a url parameter specifying a site that either matches a predefined search engine (see below) or is a valid url. If accessed with a valid url parameter the service can receive pasted text. The input from the URL parameters and the pasted text is combined to generate a complete search URL, to which the user is redirected. **While the process might sound complex this happens (almost) instantaneously and is (almost) invisible to the user.**
 
 An additional feature to note is the ability to translate text strings so that e.g. a Swedish string can be converted into English to enable searching an English language resource.
 
@@ -61,6 +64,18 @@ Currently two parameters are available
 | MD Calc          | mdc   | mdcalc          |             | Clinical calculators                                                                | English  |
 | Praktisk medicin | pm    | praktiskmedicin |             | Large collection of medical information for primary care                            | Swedish  |
 | Uptodate         | u2d   | utd             | uptodate    | Large collection of medical information                                             | English  |
+
+## Examples
+
+Here are two examples of valid url parameters both querying Google:
+
+1. https://hessius.github.io/dmohelper/?site=g
+2. https://hessius.github.io/dmohelper/?site=https://www.google.com/search?q=
+
+Here are two examples of valid url parameters querying MD Calc, one ready for an English query (no translation needed, thus no language parameter passed) and one ready for a query in German:
+
+1. https://hessius.github.io/dmohelper/?site=mdc
+2. https://hessius.github.io/dmohelper/?site=mdc&lang=de
 
 ## Other info
 
