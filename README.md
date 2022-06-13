@@ -1,5 +1,14 @@
 # DMO Helper
 
+1. [DMO Helper](#dmo-helper)
+   1. [What is This?](#what-is-this)
+   2. [Why?](#why)
+   3. [How it works](#how-it-works)
+   4. [How to use with DMO](#how-to-use-with-dmo)
+   5. [Parameters](#parameters)
+      1. [Predefined domains](#predefined-domains)
+   6. [Other info](#other-info)
+
 ## What is This?
 
 This is a service that acts as an intermediate page to facilitate search through step by step commands executed through Dragon Medical One (DMO).
