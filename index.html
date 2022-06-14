@@ -7,6 +7,11 @@
   </head>
   <body>
     <script>
+      if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
+        location.replace(
+          `https:${location.href.substring(location.protocol.length)}`
+        )
+      }
       let domainList = {
         // Note: Domains should be listed in alphabetical order.
         bing: {
