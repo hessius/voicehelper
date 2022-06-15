@@ -16,7 +16,7 @@
       .hero {
         width: 100%;
         height: 100vh;
-        background: #f0f3ff;
+        background: #f5f7fd;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -33,7 +33,7 @@
         position: relative;
         border-radius: 55px;
         padding: 30px;
-        background: #f0f3ff;
+        background: #f5f7fd;
         display: flex;
         align-items: center;
         box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15),
@@ -135,12 +135,12 @@
         },
         im: {
           url: 'https://www.internetmedicin.se/?s=',
-          name: 'Internet Medicin',
+          name: 'Internetmedicin',
           lang: 'sv'
         },
         internetmedicin: {
           url: 'https://www.internetmedicin.se/?s=',
-          name: 'Internet Medicin',
+          name: 'Internetmedicin',
           lang: 'sv'
         },
         ji: {
@@ -156,13 +156,13 @@
         lakemedelsboken: {
           url:
             'https://lakemedelsboken.se/?iso=true&imo=false&nplId=null&search=',
-          name: 'Lakemedelsboken',
+          name: 'Läkemedelsboken',
           lang: 'sv'
         },
         lmb: {
           url:
             'https://lakemedelsboken.se/?iso=true&imo=false&nplId=null&search=',
-          name: 'Lakemedelsboken',
+          name: 'Läkemedelsboken',
           lang: 'sv'
         },
         mdc: {
@@ -231,10 +231,8 @@
         } else {
           console.error('site param is empty')
         }
-        //set timeout for 5000 ms and run showUI()
-        setTimeout(showUI, 10000)
+        //setTimeout(showUI, 10000) DISABLED FOR NOW - UNWANTED?
         document.title = 'DMOhelper Ready'
-        // handle submission of form with id searchform
         document
           .getElementById('searchform')
           .addEventListener('submit', function (e) {
