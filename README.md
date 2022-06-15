@@ -36,7 +36,7 @@ An additional feature to note is the ability to translate text strings so that e
 1. Create a new step by step command "search X" (X being the database)
 2. Add the commands:
    - Keyboard shortcut: Ctrl-C
-   - Run program: Web browser of choice (e.g. Edge) with the argument https://hessius.github.io/dmohelper/?site=[INSERT SITE HERE]&lang=[INSERT LANGUANGE HERE (OPTIONAL)]
+   - Run program: Web browser of choice (e.g. Edge) with the argument https://dmohelper.com/?site=[INSERT SITE HERE]&lang=[INSERT LANGUANGE HERE (OPTIONAL)]
    - Wait: e.g. 3000 ms to let the browser load, the website is minimal enough to load nearly instantaneously
    - Keyboard shortcut: Ctrl-V
 3. Invoke the shortcut by saying "Select [TEXT]" and then "Search X"
@@ -69,15 +69,24 @@ Currently two parameters are available
 
 Here are two examples of valid url parameters both querying Google:
 
-1. https://hessius.github.io/dmohelper/?site=g
-2. https://hessius.github.io/dmohelper/?site=https://www.google.com/search?q=
+1. https://dmohelper.com/?site=g
+2. https://dmohelper.com/?site=https://www.google.com/search?q=
 
 Here are two examples of valid url parameters querying MD Calc, one ready for an English query (no translation needed, thus no language parameter passed) and one ready for a query in German:
 
-1. https://hessius.github.io/dmohelper/?site=mdc
-2. https://hessius.github.io/dmohelper/?site=mdc&lang=de
+1. https://dmohelper.com/?site=mdc
+2. https://dmohelper.com/?site=mdc&lang=de
 
 ## Other info
 
 - This tool was developed by [Jesper Hessius](https://github.com/hessius).
 - If you have any other resources you want added reach out through [first name].[surname]@nuance.com.
+
+<link rel="stylesheet" href="/air.min.css" />
+<script>
+      if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
+        location.replace(
+          `https:${location.href.substring(location.protocol.length)}`
+        )
+      }
+</script>
