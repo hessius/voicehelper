@@ -62,6 +62,7 @@ Currently two parameters are available
 | Janusinfo        | ji    | janusinfo       |             | Swedish National collection of emergency medicine resources and pharmaceutical info | Swedish  |
 | Läkemedelsboken  | lmb   | lakemedelsboken |             | Pharmaceutical guidelines                                                           | Swedish  |
 | MD Calc          | mdc   | mdcalc          |             | Clinical calculators                                                                | English  |
+| Medscape         | ms    | medscape        |             | Clinical reference (searches drugs & diseases database)                             | English  |
 | Praktisk medicin | pm    | praktiskmedicin |             | Large collection of medical information for primary care                            | Swedish  |
 | Uptodate         | u2d   | utd             | uptodate    | Large collection of medical information                                             | English  |
 
