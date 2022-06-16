@@ -64,7 +64,7 @@ Currently two parameters are available
 | MD Calc          | mdc   | mdcalc          |             | Clinical calculators                                                                | English  |
 | Medscape         | ms    | medscape        |             | Clinical reference (searches drugs & diseases database)                             | English  |
 | Praktisk medicin | pm    | praktiskmedicin |             | Large collection of medical information for primary care                            | Swedish  |
-| Uptodate         | u2d   | utd             | uptodate    | Large collection of medical information                                             | English  |
+| Uptodate         | u2d   | uptodate        | utd         | Large collection of medical information                                             | English  |
 
 ## Examples
 
