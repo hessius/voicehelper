@@ -36,10 +36,10 @@ An additional feature to note is the ability to translate text strings so that e
 1. Create a new step by step command "search X" (X being the database)
 2. Add the commands:
    - Keyboard shortcut: Ctrl-C
-   - Run program: Web browser of choice (e.g. Edge) with the argument https://dmohelper.com/?site=[INSERT SITE HERE]&lang=[INSERT LANGUANGE HERE (OPTIONAL)]
+   - Run program: https://dmohelper.com/?site=[INSERT SITE HERE]&lang=[INSERT LANGUANGE HERE (OPTIONAL)]
    - Wait: e.g. 3000 ms to let the browser load, the website is minimal enough to load nearly instantaneously
    - Keyboard shortcut: Ctrl-V
-3. Invoke the shortcut by saying "Select [TEXT]" and then "Search X"
+3. Invoke the shortcut by saying "Search X", if text has been selected, the service searches the database of choice for that term, if needed with added translation. If no text has been selected the user is presented a search box.
 
 ## Parameters
 
