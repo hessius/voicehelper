@@ -38,6 +38,8 @@
         align-items: center;
         box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15),
           -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
+        animation-duration: 0.5s;
+        animation-fill-mode: both;
       }
 
       input {
@@ -86,13 +88,56 @@
         position: absolute;
         right: 0;
       }
+      @keyframes bounceIn {
+        from,
+        20%,
+        40%,
+        60%,
+        80%,
+        to {
+          animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+
+        0% {
+          opacity: 0;
+          transform: scale3d(0.3, 0.3, 0.3);
+        }
+
+        20% {
+          transform: scale3d(1.1, 1.1, 1.1);
+        }
+
+        40% {
+          transform: scale3d(0.9, 0.9, 0.9);
+        }
+
+        60% {
+          opacity: 1;
+          transform: scale3d(1.03, 1.03, 1.03);
+        }
+
+        80% {
+          transform: scale3d(0.97, 0.97, 0.97);
+        }
+
+        to {
+          opacity: 1;
+          transform: scale3d(1, 1, 1);
+        }
+      }
+
+      .bounceIn {
+        animation-duration: calc(var(--animate-duration) * 0.75);
+        animation-name: bounceIn;
+        animation-delay: 0.3s;
+      }
     </style>
   </head>
   <body>
     <div class="hero hide">
       <form method="post" id="searchform" name="searchform">
-        <div id="searchBox" class="active">
-          <input type="text" placeholder="Search" />
+        <div id="searchBox" class="active bounceIn">
+          <input type="text" placeholder="Search" id="searchInput" />
           <div id="submit">
             <i class="gg-search"></i>
           </div>
@@ -281,6 +326,10 @@
           document.querySelector('.hero').classList.remove('hide')
           setTimeout(function () {
             document.querySelector('.hero').classList.add('show')
+            //set focus to searchbox
+            setTimeout(function () {
+              document.getElementById('searchInput').focus()
+            }, 300)
           }, 100)
         }
       }
