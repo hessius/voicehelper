@@ -1,6 +1,6 @@
-# DMO Helper
+# Voice helper
 
-1. [DMO Helper](#dmo-helper)
+1. [Voice helper](#voice-helper)
    1. [What is This?](#what-is-this)
    2. [Why?](#why)
    3. [How it works](#how-it-works)
@@ -36,7 +36,7 @@ An additional feature to note is the ability to translate text strings so that e
 1. Create a new step by step command "search X" (X being the database)
 2. Add the commands:
    - Keyboard shortcut: Ctrl-C
-   - Run program: https://dmohelper.com/?site=[INSERT SITE HERE]&lang=[INSERT LANGUANGE HERE (OPTIONAL)]
+   - Run program: https://voicehelper.io/?site=[INSERT SITE HERE]&lang=[INSERT LANGUANGE HERE (OPTIONAL)]
    - Wait: e.g. 3000 ms to let the browser load, the website is minimal enough to load nearly instantaneously
    - Keyboard shortcut: Ctrl-V
 3. Invoke the shortcut by saying "Search X", if text has been selected, the service searches the database of choice for that term, if needed with added translation. If no text has been selected the user is presented a search box.
@@ -70,13 +70,13 @@ Currently two parameters are available
 
 Here are two examples of valid url parameters both querying Google:
 
-1. https://dmohelper.com/?site=g
-2. https://dmohelper.com/?site=https://www.google.com/search?q=
+1. https://voicehelper.io/?site=g
+2. https://voicehelper.io/?site=https://www.google.com/search?q=
 
 Here are two examples of valid url parameters querying MD Calc, one ready for an English query (no translation needed, thus no language parameter passed) and one ready for a query in German:
 
-1. https://dmohelper.com/?site=mdc
-2. https://dmohelper.com/?site=mdc&lang=de
+1. https://voicehelper.io/?site=mdc
+2. https://voicehelper.io/?site=mdc&lang=de
 
 ## Other info
 
