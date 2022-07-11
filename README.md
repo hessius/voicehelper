@@ -1,3 +1,5 @@
+<img src="https://voicehelper.io/logo/logo.svg" height=150>
+
 # Voice helper
 
 1. [Voice helper](#voice-helper)
