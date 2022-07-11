@@ -1,19 +1,16 @@
 <img src="https://voicehelper.io/logo/logo.svg" height=150>
 
-# Voice helper
+# Voice Helper
 
-## voicehelper.io
-
-1. [Voice helper](#voice-helper)
-   1. [voicehelper.io](#voicehelperio)
-   2. [What is This?](#what-is-this)
-   3. [Why?](#why)
-   4. [How it works](#how-it-works)
-   5. [How to use with DMO](#how-to-use-with-dmo)
-   6. [Parameters](#parameters)
+1. [Voice Helper](#voice-helper)
+   1. [What is This?](#what-is-this)
+   2. [Why?](#why)
+   3. [How it works](#how-it-works)
+   4. [How to use with DMO](#how-to-use-with-dmo)
+   5. [Parameters](#parameters)
       1. [Predefined domains](#predefined-domains)
-   7. [Examples](#examples)
-   8. [Other info](#other-info)
+   6. [Examples](#examples)
+   7. [Other info](#other-info)
 
 ## What is This?
 
@@ -21,7 +18,11 @@ This is a service that acts as an intermediate page to facilitate search through
 
 ## Why?
 
-When executing step by step commands that go beyond the EHR, specifically to interact with websites, commands are prone to breaking due to layout changes. This is due to the engine navigating the UI using a fixed set of instructions, e.g. tabbing through a set of elements to reach a search where text can be entered. If the design of the webpage changes, an ad is inserted or a cookie noticed introduced the number of tab button presses needed to hit the correct field changes, and thus the script fails. Even when without layout changes the focus jumping incurred by repeating tab presses is visible to the user and can be jarring. Overall this equals very bad UX. But this service fixes that.
+When executing step by step commands that go beyond the EHR, specifically to interact with websites, commands are prone to breaking due to layout changes. This is due to the engine navigating the UI using a fixed set of instructions, e.g. tabbing through a set of elements to reach a search where text can be entered. If the design of the webpage changes, an ad is inserted or a cookie noticed introduced the number of tab button presses needed to hit the correct field changes, and thus the script fails. Even when without layout changes the focus jumping incurred by repeating tab presses is visible to the user and can be jarring. Overall this equals very bad UX.
+
+_But this service fixes that._
+
+This service "invisibly" and near instantaneously converts provided parameters to a complete search url and redirects the user to the results page - thus enabling the user to search across a multitude of websites by voice and unlocking some of the power of the step by step commands that are available in DMO.
 
 ## How it works
 
@@ -70,6 +71,7 @@ Currently two parameters are available
 | Medscape         | ms    | medscape        |             | Clinical reference (searches drugs & diseases database)                             | English  |
 | Praktisk medicin | pm    | praktiskmedicin |             | Large collection of medical information for primary care                            | Swedish  |
 | Uptodate         | u2d   | uptodate        | utd         | Large collection of medical information                                             | English  |
+| Vårdhandboken    | vhb   | vardhandboken   |             | Practical instructions re: medical procedures                                       | Swedish  |
 
 ## Examples
 

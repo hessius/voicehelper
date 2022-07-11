@@ -2,7 +2,7 @@
     <html>
     <head>
         <meta charset="UTF-8">
-        <title>Voice helper</title>
+        <title>Voice Helper</title>
         <style>
 /* From extension vscode.github */
 /*---------------------------------------------------------------------------------------------
@@ -38,12 +38,10 @@
     </head>
     <body class="vscode-body vscode-light">
         <img src="https://voicehelper.io/logo/logo.svg" height=150>
-<h1 id="voice-helper">Voice helper</h1>
-<h2 id="voicehelperio"><a href="http://voicehelper.io">voicehelper.io</a></h2>
+<h1 id="voice-helper">Voice Helper</h1>
 <ol>
-<li><a href="#voice-helper">Voice helper</a>
+<li><a href="#voice-helper">Voice Helper</a>
 <ol>
-<li><a href="#voicehelperio">voicehelper.io</a></li>
 <li><a href="#what-is-this">What is This?</a></li>
 <li><a href="#why">Why?</a></li>
 <li><a href="#how-it-works">How it works</a></li>
@@ -61,7 +59,9 @@
 <h2 id="what-is-this">What is This?</h2>
 <p>This is a service that acts as an intermediate page to facilitate search through step by step commands executed through Dragon Medical One (DMO).</p>
 <h2 id="why">Why?</h2>
-<p>When executing step by step commands that go beyond the EHR, specifically to interact with websites, commands are prone to breaking due to layout changes. This is due to the engine navigating the UI using a fixed set of instructions, e.g. tabbing through a set of elements to reach a search where text can be entered. If the design of the webpage changes, an ad is inserted or a cookie noticed introduced the number of tab button presses needed to hit the correct field changes, and thus the script fails. Even when without layout changes the focus jumping incurred by repeating tab presses is visible to the user and can be jarring. Overall this equals very bad UX. But this service fixes that.</p>
+<p>When executing step by step commands that go beyond the EHR, specifically to interact with websites, commands are prone to breaking due to layout changes. This is due to the engine navigating the UI using a fixed set of instructions, e.g. tabbing through a set of elements to reach a search where text can be entered. If the design of the webpage changes, an ad is inserted or a cookie noticed introduced the number of tab button presses needed to hit the correct field changes, and thus the script fails. Even when without layout changes the focus jumping incurred by repeating tab presses is visible to the user and can be jarring. Overall this equals very bad UX.</p>
+<p><em>But this service fixes that.</em></p>
+<p>This service &quot;invisibly&quot; and near instantaneously converts provided parameters to a complete search url and redirects the user to the results page - thus enabling the user to search across a multitude of websites by voice and unlocking some of the power of the step by step commands that are available in DMO.</p>
 <h2 id="how-it-works">How it works</h2>
 <p>By design this service contains no UI, this is in order to be basically invisible to the end user - it should &quot;just work&quot;.
 The service takes arguments from two fronts:</p>
@@ -190,6 +190,14 @@ Accepts any two letter language code (<a href="https://en.wikipedia.org/wiki/Lis
 <td>utd</td>
 <td>Large collection of medical information</td>
 <td>English</td>
+</tr>
+<tr>
+<td>Vårdhandboken</td>
+<td>vhb</td>
+<td>vardhandboken</td>
+<td></td>
+<td>Practical instructions re: medical procedures</td>
+<td>Swedish</td>
 </tr>
 </tbody>
 </table>
