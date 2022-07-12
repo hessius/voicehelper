@@ -1,3 +1,5 @@
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
 <img src="https://voicehelper.io/logo/logo.svg" height=150>
 
 # Voice Helper
