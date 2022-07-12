@@ -1,6 +1,6 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
-<img src="https://voicehelper.io/logo/logo.svg" height=150>
+<img src="https://voicehelper.io/logo/logo.svg">
 
 # Voice Helper
 
@@ -96,9 +96,9 @@ Here are two examples of valid url parameters querying MD Calc, one ready for an
 Logotypes are available under the same license as the rest of the software. The logo is a grayscale glyph that can be tinted to match the context where it is used. There are five different versions of the logo provided.
 | <img src="https://voicehelper.io/logo/SVG/logo.svg" height=75> | <img src="https://voicehelper.io/logo/SVG/logo_blue.svg" height=75> | <img src="https://voicehelper.io/logo/SVG/logo_red.svg" height=75> | <img src="https://voicehelper.io/logo/SVG/logo_green.svg" height=75> | <img src="https://voicehelper.io/logo/SVG/logo_yellow.svg" height=75> |
 |--------------------------------------------------|-------------------------------------------------------|------------------------------------------------------|--------------------------------------------------------|---------------------------------------------------------|
-| [svg](https://voicehelper.io/logo/SVG/logo.svg) | [svg](https://voicehelper.io/logo/SVG/logo_blue.svg) | [svg](https://voicehelper.io/logo/SVG/logo_red.svg) | [svg](https://voicehelper.io/logo/SVG/logo_green.svg) | [svg](https://voicehelper.io/logo/SVG/logo_yellow.svg) |
-| [2x](https://voicehelper.io/logo/2x/logo@2x.png) | [2x](https://voicehelper.io/logo/2x/logo_blue@2x.png) | [2x](https://voicehelper.io/logo/2x/logo_red@2x.png) | [2x](https://voicehelper.io/logo/2x/logo_green@2x.png) | [2x](https://voicehelper.io/logo/2x/logo_yellow@2x.png) |
-| [4x](https://voicehelper.io/logo/4x/logo@4x.png) | [4x](https://voicehelper.io/logo/4x/logo_blue@4x.png) | [4x](https://voicehelper.io/logo/4x/logo_red@4x.png) | [4x](https://voicehelper.io/logo/4x/logo_green@4x.png) | [4x](https://voicehelper.io/logo/4x/logo_yellow@4x.png) |
+| <center>[**svg**](https://voicehelper.io/logo/SVG/logo.svg)</center> | <center>[**svg**](https://voicehelper.io/logo/SVG/logo_blue.svg)</center> | <center>[**svg**](https://voicehelper.io/logo/SVG/logo_red.svg)</center> | <center>[**svg**](https://voicehelper.io/logo/SVG/logo_green.svg)</center> | <center>[**svg**](https://voicehelper.io/logo/SVG/logo_yellow.svg)</center> |
+| <center>[**2x**](https://voicehelper.io/logo/2x/logo@2x.png)</center> | <center>[**2x**](https://voicehelper.io/logo/2x/logo_blue@2x.png)</center> | <center>[**2x**](https://voicehelper.io/logo/2x/logo_red@2x.png)</center> | <center>[**2x**](https://voicehelper.io/logo/2x/logo_green@2x.png)</center> | <center>[**2x**](https://voicehelper.io/logo/2x/logo_yellow@2x.png)</center> |
+| <center>[**4x**](https://voicehelper.io/logo/4x/logo@4x.png)</center> | <center>[**4x**](https://voicehelper.io/logo/4x/logo_blue@4x.png)</center> | <center>[**4x**](https://voicehelper.io/logo/4x/logo_red@4x.png)</center> | <center>[**4x**](https://voicehelper.io/logo/4x/logo_green@4x.png) </center>| <center>[**4x**](https://voicehelper.io/logo/4x/logo_yellow@4x.png)</center> |
 
 ## Other info
 
@@ -107,7 +107,7 @@ Logotypes are available under the same license as the rest of the software. The 
 
 ## License
 
-This software is distributed freely under the GNU Affero General Public License v3.0.
+This software is distributed freely under the GNU Affero General Public License v3.0 (GNU AGPL 3.0).
 Full license statement is available [here](https://www.gnu.org/licenses/agpl-3.0.html) and in the file `LICENSE` included in the root of the repository.
 This license permits reuse in any form as long as the original author and source are credited.
 
