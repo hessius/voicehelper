@@ -10,9 +10,10 @@
    5. [Parameters](#parameters)
       1. [Predefined domains](#predefined-domains)
    6. [Examples](#examples)
-   7. [Other info](#other-info)
-   8. [License](#license)
-   9. [Acknowledgements](#acknowledgements)
+   7. [Logo](#logo)
+   8. [Other info](#other-info)
+   9. [License](#license)
+   10. [Acknowledgements](#acknowledgements)
 
 ## What is This?
 
@@ -88,11 +89,19 @@ Here are two examples of valid url parameters querying MD Calc, one ready for an
 1. https://voicehelper.io/?site=mdc
 2. https://voicehelper.io/?site=mdc&lang=de
 
+## Logo
+
+Logotypes are available under the same license as the rest of the software. The logo is a grayscale glyph that can be tinted to match the context where it is used. There are five different versions of the logo provided.
+| <img src="https://voicehelper.io/logo/SVG/logo.svg" height=75> | <img src="https://voicehelper.io/logo/SVG/logo_blue.svg" height=75> | <img src="https://voicehelper.io/logo/SVG/logo_red.svg" height=75> | <img src="https://voicehelper.io/logo/SVG/logo_green.svg" height=75> | <img src="https://voicehelper.io/logo/SVG/logo_yellow.svg" height=75> |
+|--------------------------------------------------|-------------------------------------------------------|------------------------------------------------------|--------------------------------------------------------|---------------------------------------------------------|
+| [svg](https://voicehelper.io/logo/SVG/logo.svg) | [svg](https://voicehelper.io/logo/SVG/logo_blue.svg) | [svg](https://voicehelper.io/logo/SVG/logo_red.svg) | [svg](https://voicehelper.io/logo/SVG/logo_green.svg) | [svg](https://voicehelper.io/logo/SVG/logo_yellow.svg) |
+| [2x](https://voicehelper.io/logo/2x/logo@2x.png) | [2x](https://voicehelper.io/logo/2x/logo_blue@2x.png) | [2x](https://voicehelper.io/logo/2x/logo_red@2x.png) | [2x](https://voicehelper.io/logo/2x/logo_green@2x.png) | [2x](https://voicehelper.io/logo/2x/logo_yellow@2x.png) |
+| [4x](https://voicehelper.io/logo/4x/logo@4x.png) | [4x](https://voicehelper.io/logo/4x/logo_blue@4x.png) | [4x](https://voicehelper.io/logo/4x/logo_red@4x.png) | [4x](https://voicehelper.io/logo/4x/logo_green@4x.png) | [4x](https://voicehelper.io/logo/4x/logo_yellow@4x.png) |
+
 ## Other info
 
 - This tool was developed by [Jesper Hessius](https://github.com/hessius).
 - If you have any other resources you want added reach out through [first name].[surname]@nuance.com.
-- Logotypes are available (and can be used under the same license as the rest of the software): [@2x](https://voicehelper.io/logo/logo@2x.png), [@4x](https://voicehelper.io/logo/logo@4x.png) & [svg](https://voicehelper.io/logo/logo.svg).
 
 ## License
 
