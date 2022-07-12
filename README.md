@@ -1,6 +1,6 @@
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="https://voicehelper.io/logo/SVG/logo.svg" type="image/svg+xml">
 
-<img src="https://voicehelper.io/logo/logo.svg">
+<img src="https://voicehelper.io/logo/SVG/logo.svg">
 
 # VoiceHelper
 
