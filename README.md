@@ -10,8 +10,9 @@
    5. [Parameters](#parameters)
       1. [Predefined domains](#predefined-domains)
    6. [Examples](#examples)
-   7. [License](#license)
-   8. [Other info](#other-info)
+   7. [Other info](#other-info)
+   8. [License](#license)
+   9. [Acknowledgements](#acknowledgements)
 
 ## What is This?
 
@@ -87,16 +88,21 @@ Here are two examples of valid url parameters querying MD Calc, one ready for an
 1. https://voicehelper.io/?site=mdc
 2. https://voicehelper.io/?site=mdc&lang=de
 
+## Other info
+
+- This tool was developed by [Jesper Hessius](https://github.com/hessius).
+- If you have any other resources you want added reach out through [first name].[surname]@nuance.com.
+- Logotypes are available (and can be used under the same license as the rest of the software): [@2x](https://voicehelper.io/logo/logo@2x.png), [@4x](https://voicehelper.io/logo/logo@4x.png) & [svg](https://voicehelper.io/logo/logo.svg).
+
 ## License
 
 This software is distributed freely under the GNU Affero General Public License v3.0.
 Full license statement is available [here](https://www.gnu.org/licenses/agpl-3.0.html) and in the file `LICENSE` included in the root of the repository.
 This license permits reuse in any form as long as the original author and source are credited.
 
-## Other info
+## Acknowledgements
 
-- This tool was developed by [Jesper Hessius](https://github.com/hessius).
-- If you have any other resources you want added reach out through [first name].[surname]@nuance.com.
+The logotype used for this project is a remix of glyphs from [The Noun Project](https://thenounproject.com) by authors [Chintuza](https://thenounproject.com/chintuza/) and [Symbolon](https://thenounproject.com/symbolon/).
 
 <link rel="stylesheet" href="/air.min.css" />
 <script>
