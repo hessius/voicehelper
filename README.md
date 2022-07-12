@@ -2,10 +2,10 @@
 
 <img src="https://voicehelper.io/logo/logo.svg">
 
-# Voice Helper
+# VoiceHelper
 
-1. [Voice Helper](#voice-helper)
-   1. [What is This?](#what-is-this)
+1. [VoiceHelper](#voicehelper)
+   1. [What is VoiceHelper?](#what-is-voicehelper)
    2. [Why?](#why)
    3. [How it works](#how-it-works)
    4. [How to use with DMO](#how-to-use-with-dmo)
@@ -17,21 +17,21 @@
    9. [License](#license)
    10. [Acknowledgements](#acknowledgements)
 
-## What is This?
+## What is VoiceHelper?
 
-This is a service that acts as an intermediate page to facilitate search through step by step commands executed through Dragon Medical One (DMO).
+VoiceHelper is a service that acts as an intermediate page to facilitate search through step by step commands executed through Dragon Medical One (DMO).
 
 ## Why?
 
-When executing step by step commands that go beyond the EHR, specifically to interact with websites, commands are prone to breaking due to layout changes. This is due to the engine navigating the UI using a fixed set of instructions, e.g. tabbing through a set of elements to reach a search where text can be entered. If the design of the webpage changes, an ad is inserted or a cookie noticed introduced the number of tab button presses needed to hit the correct field changes, and thus the script fails. Even when without layout changes the focus jumping incurred by repeating tab presses is visible to the user and can be jarring. Overall this equals very bad UX.
+When executing step by step commands from DMO that go beyond the EHR, specifically to interact with websites, commands are prone to breaking due to layout changes. This is due to the engine navigating the UI using a fixed set of instructions, e.g. tabbing through a set of elements to reach a search field / text box where text can be entered. If the design of the webpage changes, e.g. because an ad is inserted or a cookie notice introduced, the number of tab button presses needed to hit the correct field changes, and thus the step by step command fails. Even when without layout changes the focus jumping incurred by repeating tab presses is visible to the user, visually jarring and slow. Overall this equals very bad UX.
 
 _But this service fixes that._
 
-This service "invisibly" and near instantaneously converts provided parameters to a complete search url and redirects the user to the results page - thus enabling the user to search across a multitude of websites by voice and unlocking some of the power of the step by step commands that are available in DMO.
+VoiceHelper "invisibly" and near instantaneously converts provided parameters to a complete search url and redirects the user to the results page - thus enabling quick and easy step by step commands that let the user search across a multitude of websites by voice. In short, VoiceHelper unlocks some of the power of the step by step commands that are available in DMO.
 
 ## How it works
 
-By design this service contains no UI, this is in order to be basically invisible to the end user - it should "just work".
+By design this service contains no visible UI in its initial state, this is in order to be basically invisible to the end user - searches appear to go directly from DMO to the domain that is being searched.
 The service takes arguments from two fronts:
 
 **a)** in the form of URL search params e.g. domain.com?foo=bar
@@ -41,6 +41,8 @@ The service takes arguments from two fronts:
 To use the service, when accessing this page you need to to provide a url parameter specifying a site that either matches a predefined search engine (see below) or is a valid url. If accessed with a valid url parameter the service can receive pasted text. The input from the URL parameters and the pasted text is combined to generate a complete search URL, to which the user is redirected. **While the process might sound complex this happens (almost) instantaneously and is (almost) invisible to the user.**
 
 An additional feature to note is the ability to translate text strings so that e.g. a Swedish string can be converted into English to enable searching an English language resource.
+
+If a domain has been provided but no search text is provided on paste - VoiceHelper shows a search box where the user can enter search text and sets focus to it so that the user can use DMO to directly search the specified site.
 
 ## How to use with DMO
 

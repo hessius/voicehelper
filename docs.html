@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Voice Helper</title>
+    <title>VoiceHelper</title>
     <style>
       /* From extension vscode.github */
       /*---------------------------------------------------------------------------------------------
@@ -1156,12 +1156,12 @@
   <body class="vscode-body vscode-light">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <img src="https://voicehelper.io/logo/logo.svg" />
-    <h1 id="voice-helper">Voice Helper</h1>
+    <h1 id="voicehelper">VoiceHelper</h1>
     <ol>
       <li>
-        <a href="#voice-helper">Voice Helper</a>
+        <a href="#voicehelper">VoiceHelper</a>
         <ol>
-          <li><a href="#what-is-this">What is This?</a></li>
+          <li><a href="#what-is-voicehelper">What is VoiceHelper?</a></li>
           <li><a href="#why">Why?</a></li>
           <li><a href="#how-it-works">How it works</a></li>
           <li><a href="#how-to-use-with-dmo">How to use with DMO</a></li>
@@ -1179,36 +1179,40 @@
         </ol>
       </li>
     </ol>
-    <h2 id="what-is-this">What is This?</h2>
+    <h2 id="what-is-voicehelper">What is VoiceHelper?</h2>
     <p>
-      This is a service that acts as an intermediate page to facilitate search
-      through step by step commands executed through Dragon Medical One (DMO).
+      VoiceHelper is a service that acts as an intermediate page to facilitate
+      search through step by step commands executed through Dragon Medical One
+      (DMO).
     </p>
     <h2 id="why">Why?</h2>
     <p>
-      When executing step by step commands that go beyond the EHR, specifically
-      to interact with websites, commands are prone to breaking due to layout
-      changes. This is due to the engine navigating the UI using a fixed set of
-      instructions, e.g. tabbing through a set of elements to reach a search
-      where text can be entered. If the design of the webpage changes, an ad is
-      inserted or a cookie noticed introduced the number of tab button presses
-      needed to hit the correct field changes, and thus the script fails. Even
-      when without layout changes the focus jumping incurred by repeating tab
-      presses is visible to the user and can be jarring. Overall this equals
-      very bad UX.
+      When executing step by step commands from DMO that go beyond the EHR,
+      specifically to interact with websites, commands are prone to breaking due
+      to layout changes. This is due to the engine navigating the UI using a
+      fixed set of instructions, e.g. tabbing through a set of elements to reach
+      a search field / text box where text can be entered. If the design of the
+      webpage changes, e.g. because an ad is inserted or a cookie notice
+      introduced, the number of tab button presses needed to hit the correct
+      field changes, and thus the step by step command fails. Even when without
+      layout changes the focus jumping incurred by repeating tab presses is
+      visible to the user, visually jarring and slow. Overall this equals very
+      bad UX.
     </p>
     <p><em>But this service fixes that.</em></p>
     <p>
-      This service &quot;invisibly&quot; and near instantaneously converts
+      VoiceHelper &quot;invisibly&quot; and near instantaneously converts
       provided parameters to a complete search url and redirects the user to the
-      results page - thus enabling the user to search across a multitude of
-      websites by voice and unlocking some of the power of the step by step
-      commands that are available in DMO.
+      results page - thus enabling quick and easy step by step commands that let
+      the user search across a multitude of websites by voice. In short,
+      VoiceHelper unlocks some of the power of the step by step commands that
+      are available in DMO.
     </p>
     <h2 id="how-it-works">How it works</h2>
     <p>
-      By design this service contains no UI, this is in order to be basically
-      invisible to the end user - it should &quot;just work&quot;. The service
+      By design this service contains no visible UI in its initial state, this
+      is in order to be basically invisible to the end user - searches appear to
+      go directly from DMO to the domain that is being searched. The service
       takes arguments from two fronts:
     </p>
     <p>
@@ -1232,6 +1236,12 @@
       An additional feature to note is the ability to translate text strings so
       that e.g. a Swedish string can be converted into English to enable
       searching an English language resource.
+    </p>
+    <p>
+      If a domain has been provided but no search text is provided on paste -
+      VoiceHelper shows a search box where the user can enter search text and
+      sets focus to it so that the user can use DMO to directly search the
+      specified site.
     </p>
     <h2 id="how-to-use-with-dmo">How to use with DMO</h2>
     <ol>
