@@ -10,7 +10,8 @@
    5. [Parameters](#parameters)
       1. [Predefined domains](#predefined-domains)
    6. [Examples](#examples)
-   7. [Other info](#other-info)
+   7. [License](#license)
+   8. [Other info](#other-info)
 
 ## What is This?
 
@@ -70,6 +71,7 @@ Currently two parameters are available
 | MD Calc          | mdc   | mdcalc          |             | Clinical calculators                                                                | English  |
 | Medscape         | ms    | medscape        |             | Clinical reference (searches drugs & diseases database)                             | English  |
 | Praktisk medicin | pm    | praktiskmedicin |             | Large collection of medical information for primary care                            | Swedish  |
+| Svensk MESH      | mesh  |                 |             | Medical dictionary with Swedish and English translations                            | Swedish  |
 | Uptodate         | u2d   | uptodate        | utd         | Large collection of medical information                                             | English  |
 | Vårdhandboken    | vhb   | vardhandboken   |             | Practical instructions re: medical procedures                                       | Swedish  |
 
@@ -84,6 +86,12 @@ Here are two examples of valid url parameters querying MD Calc, one ready for an
 
 1. https://voicehelper.io/?site=mdc
 2. https://voicehelper.io/?site=mdc&lang=de
+
+## License
+
+This software is distributed freely under the GNU Affero General Public License v3.0.
+Full license statement is available [here](https://www.gnu.org/licenses/agpl-3.0.html) and in the file `LICENSE` included in the root of the repository.
+This license permits reuse in any form as long as the original author and source are credited.
 
 ## Other info
 
