@@ -19,7 +19,7 @@
 
 ## What is VoiceHelper?
 
-VoiceHelper is a service that acts as an intermediate page to facilitate search through step by step commands executed through Dragon Medical One (DMO).
+VoiceHelper is a service that adds search as a skill to Dragon Medical One (DMO). It achieves this by acting as an intermediate page to facilitate search through step by step commands executed through DMO.
 
 ## Why?
 
@@ -27,7 +27,7 @@ When executing step by step commands from DMO that go beyond the EHR, specifical
 
 _But this service fixes that._
 
-VoiceHelper "invisibly" and near instantaneously converts provided parameters to a complete search url and redirects the user to the results page - thus enabling quick and easy step by step commands that let the user search across a multitude of websites by voice. In short, VoiceHelper unlocks some of the power of the step by step commands that are available in DMO.
+VoiceHelper "invisibly" and near instantaneously converts provided parameters to a complete search url and redirects the user to the results page - thus enabling quick and easy step by step commands that let the user search across a multitude of websites by voice. In short, VoiceHelper unlocks some of the power of the step by step commands that are available in DMO. Essentially a community contributed skill for DMO.
 
 ## How it works
 
@@ -105,7 +105,7 @@ Logotypes are available under the same license as the rest of the software. The 
 ## Other info
 
 - This tool was developed by [Jesper Hessius](https://github.com/hessius).
-- If you have any other resources you want added reach out through [first name].[surname]@nuance.com.
+- If you have any other resources you want added reach out through [surname]@me.com.
 
 ## License
 
@@ -125,3 +125,4 @@ The logotype used for this project is a remix of glyphs from [The Noun Project](
         )
       }
 </script>
+∏
