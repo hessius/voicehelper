@@ -13,7 +13,7 @@
       1. [Predefined domains](#predefined-domains)
    6. [Examples](#examples)
    7. [Logo](#logo)
-   8. [Other info](#other-info)
+   8. [Contact / Issues](#contact--issues)
    9. [License](#license)
    10. [Acknowledgements](#acknowledgements)
 
@@ -68,8 +68,10 @@ Currently two parameters are available
 | Name             | Param | Param alt       | Param alt 2 | Description                                                                         | Language |
 | ---------------- | ----- | --------------- | ----------- | ----------------------------------------------------------------------------------- | -------- |
 | Bing             | b     | bing            |             | General purpose search engine                                                       | Any      |
+| BDPM             | bdpm  |                 |             | Pharmaceutical information database, N.B. search performed through google           | French   |
 | FASS             | fass  |                 |             | Pharmaceutical information database                                                 | Swedish  |
 | Google           | g     | google          |             | General purpose search engine                                                       | Any      |
+| HAS              | has   |                 |             | Collection of databases with practice guidelines, pharmaceutical info etc           | French   |
 | ICD.nu           | icd   |                 |             | Coding search engine, covers diagnostic as well procedure codes                     | Swedish  |
 | Internetmedicin  | im    | internetmedicin |             | Swedish equivalent of Uptodate                                                      | Swedish  |
 | Janusinfo        | ji    | janusinfo       |             | Swedish National collection of emergency medicine resources and pharmaceutical info | Swedish  |
@@ -102,13 +104,14 @@ Logotypes are available under the same license as the rest of the software. The 
 | <center>[**2x**](https://voicehelper.io/logo/2x/logo@2x.png)</center> | <center>[**2x**](https://voicehelper.io/logo/2x/logo_blue@2x.png)</center> | <center>[**2x**](https://voicehelper.io/logo/2x/logo_red@2x.png)</center> | <center>[**2x**](https://voicehelper.io/logo/2x/logo_green@2x.png)</center> | <center>[**2x**](https://voicehelper.io/logo/2x/logo_yellow@2x.png)</center> |
 | <center>[**4x**](https://voicehelper.io/logo/4x/logo@4x.png)</center> | <center>[**4x**](https://voicehelper.io/logo/4x/logo_blue@4x.png)</center> | <center>[**4x**](https://voicehelper.io/logo/4x/logo_red@4x.png)</center> | <center>[**4x**](https://voicehelper.io/logo/4x/logo_green@4x.png) </center>| <center>[**4x**](https://voicehelper.io/logo/4x/logo_yellow@4x.png)</center> |
 
-## Other info
+## Contact / Issues
 
 - This tool was developed by [Jesper Hessius](https://github.com/hessius).
-- If you have any other resources you want added reach out through [surname]@me.com.
+- If you have any other resources you want added reach out through [surname]@me.com or submit an issue on the [github repository](https://github.com/hessius/voicehelper/issues).
 
 ## License
 
+The source code is available on [Github](https://github.com/hessius/voicehelper).
 This software is distributed freely under the GNU Affero General Public License v3.0 (GNU AGPL 3.0).
 Full license statement is available [here](https://www.gnu.org/licenses/agpl-3.0.html) and in the file `LICENSE` included in the root of the repository.
 This license permits reuse in any form as long as the original author and source are credited.
