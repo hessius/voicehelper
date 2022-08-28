@@ -13,7 +13,7 @@
         font-family: 'Varela Round', sans-serif;
       }
 
-      .hero {
+      .search {
         width: 100%;
         height: 100vh;
         background: #f5f7fd;
@@ -41,7 +41,31 @@
         animation-duration: 0.5s;
         animation-fill-mode: both;
       }
-
+      .site {
+        background: #f5f7fd;
+        border-radius: 10px;
+        margin: 10px 3% 5px 3%;
+        float: left;
+        width: 25%;
+        padding: 10px;
+        float: left;
+        clear: none;
+        box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15),
+          -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
+        text-align: center;
+        font-size: 16px;
+        padding: 10px;
+      }
+      .siteselect h4 {
+        clear: both;
+        padding-top: 50px;
+      }
+      .sitelang {
+        margin-bottom: 30px;
+      }
+      #selectorInput {
+        opacity: 1;
+      }
       input {
         font-size: 20px;
         width: 0px;
@@ -134,7 +158,7 @@
     </style>
   </head>
   <body>
-    <div class="hero hide">
+    <div class="search hide">
       <form method="post" id="searchform" name="searchform">
         <div id="searchBox" class="active bounceIn">
           <input type="text" placeholder="Search" id="searchInput" />
@@ -144,60 +168,33 @@
         </div>
       </form>
     </div>
+    <div class="siteselect hide">
+      <input type="text" placeholder="siteselector" id="selectorInput" />
+      <div class="sitelang sv">
+        <h4>Swedish</h4>
+      </div>
+      <div class="sitelang en">
+        <h4>English</h4>
+      </div>
+      <div class="sitelang any">
+        <h4>General</h4>
+      </div>
+    </div>
     <script>
       if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
         location.replace(
           `https:${location.href.substring(location.protocol.length)}`
         )
       }
+
       let domainList = {
-        // Note: Domains should be listed in alphabetical order.
-        bing: {
-          url: 'https://www.bing.com/search?q=',
-          name: 'Bing'
-        },
-        b: {
-          url: 'https://www.bing.com/search?q=',
-          name: 'Bing'
-        },
-        bdpm: {
-          url:
-            'https://www.google.com/search?q=site%3Ahttps%3A%2F%2Fbase-donnees-publique.medicaments.gouv.fr%2F+',
-          name: 'BASE DE DONNÉES PUBLIQUE DES MÉDICAMENTS',
-          lang: 'fr'
-        },
+        // Note: Domains should be listed in order of language with English next to last and "any" at the end.
+        // All other languages are listed in alphabetical order, i.e. "French, Swedish, English, Any"
+        // Within an individual language domains should be listed in alphabetical order.
         fass: {
           url: 'https://www.fass.se/LIF/result?&userType=0&query=',
           name: 'FASS',
           lang: 'sv'
-        },
-        g: {
-          url: 'https://www.google.com/search?q=',
-          name: 'Google'
-        },
-        gi: {
-          url:
-            'https://giftinformation.se/lakare/searchpage/?category=all&query=',
-          name: 'Giftinfo',
-          lang: 'sv',
-          filter: /^[a-zA-Z0-9äöåÄÖÅ]+[\s]{1}[a-zA-Z0-9äöåÄÖÅ]+/
-        },
-        giftinfo: {
-          url:
-            'https://giftinformation.se/lakare/searchpage/?category=all&query=',
-          name: 'Giftinfo',
-          lang: 'sv',
-          filter: /^[a-zA-Z0-9äöåÄÖÅ]+[\s]{1}[a-zA-Z0-9äöåÄÖÅ]+/
-        },
-        google: {
-          url: 'https://www.google.com/search?q=',
-          name: 'Google'
-        },
-        has: {
-          url:
-            'https://www.has-sante.fr/jcms/fc_2875171/fr/resultat-de-recherche?text=',
-          name: 'HAS',
-          lang: 'fr'
         },
         icd: {
           url: 'http://icd.internetmedicin.se/',
@@ -236,6 +233,31 @@
           name: 'Läkemedelsboken',
           lang: 'sv'
         },
+        mesh: {
+          url: 'https://mesh.kib.ki.se/Mesh/search/?searchterm=',
+          name: 'Mesh',
+          lang: 'sv'
+        },
+        pm: {
+          url: 'https://www.praktiskmedicin.se/?s=',
+          name: 'Praktisk Medicin',
+          lang: 'sv'
+        },
+        praktiskmedicin: {
+          url: 'https://www.praktiskmedicin.se/?s=',
+          name: 'Praktisk Medicin',
+          lang: 'sv'
+        },
+        vhb: {
+          url: 'https://www.vardhandboken.se/sok/?q=',
+          name: 'Vårdhandboken',
+          lang: 'sv'
+        },
+        vardhandboken: {
+          url: 'https://www.vardhandboken.se/sok/?q=',
+          name: 'Vårdhandboken',
+          lang: 'sv'
+        },
         mdc: {
           url: 'https://www.mdcalc.com/search?s=',
           name: 'MD Calc',
@@ -251,25 +273,10 @@
           name: 'Medscape',
           lang: 'en'
         },
-        mesh: {
-          url: 'https://mesh.kib.ki.se/Mesh/search/?searchterm=',
-          name: 'Mesh',
-          lang: 'sv'
-        },
         ms: {
           url: 'https://search.medscape.com/search/?plr=ref&q=',
           name: 'Medscape',
           lang: 'en'
-        },
-        pm: {
-          url: 'https://www.praktiskmedicin.se/?s=',
-          name: 'Praktisk Medicin',
-          lang: 'sv'
-        },
-        praktiskmedicin: {
-          url: 'https://www.praktiskmedicin.se/?s=',
-          name: 'Praktisk Medicin',
-          lang: 'sv'
         },
         u2d: {
           url: 'https://www.uptodate.com/contents/search?search=',
@@ -286,18 +293,24 @@
           name: 'Uptodate',
           lang: 'en'
         },
-        vhb: {
-          url: 'https://www.vardhandboken.se/sok/?q=',
-          name: 'Vårdhandboken',
-          lang: 'sv'
+        bing: {
+          url: 'https://www.bing.com/search?q=',
+          name: 'Bing'
         },
-        vardhandboken: {
-          url: 'https://www.vardhandboken.se/sok/?q=',
-          name: 'Vårdhandboken',
-          lang: 'sv'
+        b: {
+          url: 'https://www.bing.com/search?q=',
+          name: 'Bing'
+        },
+        g: {
+          url: 'https://www.google.com/search?q=',
+          name: 'Google'
+        },
+        google: {
+          url: 'https://www.google.com/search?q=',
+          name: 'Google'
         }
       }
-      let url, translate, slang, tlang, name, site, filter
+      let url, translate, slang, tlang, name, site
       document.addEventListener('DOMContentLoaded', function () {
         let urlParams = new URLSearchParams(window.location.search)
         site = urlParams.get('site')
@@ -307,7 +320,6 @@
           if (domainList[site]) {
             url = domainList[site].url
             name = domainList[site].name
-            filter = domainList[site].filter
             //set placeholder for textinput in searchbox to "search" + name
             document.getElementById('searchBox').children[0].placeholder =
               'Search ' + name
@@ -326,9 +338,9 @@
             url = site
           }
         } else {
-          console.error('site param is empty')
+          console.error('site param is empty, showing site selector')
+          showUI()
         }
-        //setTimeout(showUI, 10000) DISABLED FOR NOW - UNWANTED?
         document.title = 'Voice Helper Ready'
         document
           .getElementById('searchform')
@@ -353,6 +365,13 @@
           }
         }
       }
+      function loadCSS (url) {
+        var link = document.createElement('link')
+        link.type = 'text/css'
+        link.rel = 'stylesheet'
+        link.href = url
+        document.getElementsByTagName('head')[0].appendChild(link)
+      }
       function translateQuery (text, sourcelang, translationlang) {
         let translationurl = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sourcelang}&tl=${translationlang}&dt=t&q=${text}`
         fetch(translationurl)
@@ -363,14 +382,62 @@
             window.location.href = url
           })
       }
+      // a function to go through domainList and for each entry with unique url add a div with title and number to the sitelang div with the same class as the lang of the entry and add a click event to the div
+      function addSiteList () {
+        //filter domainlist to only have unique urls
+        let uniqueUrls = Object.values(domainList).filter(
+          (item, index, self) =>
+            index === self.findIndex(t => t.url === item.url)
+        )
+        for (let key in uniqueUrls) {
+          console.log(key)
+          let div = document.createElement('div')
+          let url = uniqueUrls[key].url
+          //variable to hold the position in the index + 1 to make it easier to read
+          let pos = Number(key) + 1
+          let lang = uniqueUrls[key].lang ? uniqueUrls[key].lang : 'any'
+          div.className = `${lang} site`
+          let sitelang = document.getElementsByClassName(`sitelang ${lang}`)
+          console.log(div.className)
+          div.title = uniqueUrls[key].name
+          console.log(div.title)
+          div.innerHTML = `${pos}. ${uniqueUrls[key].name}`
+          console.log(div.innerHTML)
+          div.addEventListener('click', function () {
+            console.log(url)
+          })
+          sitelang[0].appendChild(div)
+        }
+      }
       function showUI () {
+        loadCSS('/air.min.css')
         if (url) {
-          document.querySelector('.hero').classList.remove('hide')
+          document.querySelector('.search').classList.remove('hide')
           setTimeout(function () {
-            document.querySelector('.hero').classList.add('show')
+            document.querySelector('.search').classList.add('show')
             //set focus to searchbox
             setTimeout(function () {
               document.getElementById('searchInput').focus()
+            }, 300)
+          }, 100)
+        } else {
+          addSiteList()
+          document.querySelector('.siteselect').classList.remove('hide')
+          setTimeout(function () {
+            document.querySelector('.siteselect').classList.add('show')
+            setTimeout(function () {
+              document.getElementById('selectorInput').focus()
+              document
+                .getElementById('selectorInput')
+                .addEventListener('blur', function (e) {
+                  e.preventDefault()
+                  console.log('blur')
+                  setTimeout(function () {
+                    document.getElementById('selectorInput').focus()
+                    console.log('focus')
+                  }, 50)
+                })
+              //document.getElementById('selectorInput').removeEventListener('blur')
             }, 300)
           }, 100)
         }
@@ -380,18 +447,10 @@
         e.stopPropagation()
         e.preventDefault()
         clipboardData = e.clipboardData || window.clipboardData
-
         pastedData = clipboardData
           .getData('Text')
           .toLowerCase()
           .trim()
-        if (filter) {
-          let regex = new RegExp(filter)
-          let match = regex.exec(pastedData)
-          if (match) {
-            pastedData = match[0]
-          }
-        }
         if (pastedData && url) {
           document.title = `Redirecting to ${name}`
 
@@ -405,6 +464,17 @@
           showUI()
         }
       }
+      function waitForInput () {
+        setTimeout(function () {
+          let selectorInput = document.getElementById('selectorInput').value
+          if (selectorInput) {
+            alert(selectorInput)
+          } else {
+            waitForInput()
+          }
+        }, 750)
+      }
+      waitForInput()
     </script>
   </body>
 </html>
