@@ -52,6 +52,7 @@
 <li><a href="#predefined-domains">Predefined domains</a></li>
 </ol>
 </li>
+<li><a href="#how-to-add-predefined-domains">How to add predefined domains</a></li>
 <li><a href="#examples">Examples</a></li>
 <li><a href="#logo">Logo</a></li>
 <li><a href="#contact--issues">Contact / Issues</a></li>
@@ -130,6 +131,14 @@ Accepts any two letter language code (<a href="https://en.wikipedia.org/wiki/Lis
 <td></td>
 <td></td>
 <td>Pharmaceutical information database</td>
+<td>Swedish</td>
+</tr>
+<tr>
+<td>Giftinformation</td>
+<td>gi</td>
+<td>giftinfo</td>
+<td></td>
+<td>Swedish national toxicology database</td>
 <td>Swedish</td>
 </tr>
 <tr>
@@ -230,6 +239,16 @@ Accepts any two letter language code (<a href="https://en.wikipedia.org/wiki/Lis
 </tr>
 </tbody>
 </table>
+<h2 id="how-to-add-predefined-domains">How to add predefined domains</h2>
+<p>Adding predefined domains is easy, just add the domain to the list in the index.html fiole and the service will automatically add it to available domains.
+The structure of the predefined domains is as follows:</p>
+<pre><code class="language-js"><div>[param name]: {
+    <span class="hljs-attr">url</span>: [search url],
+    <span class="hljs-attr">name</span>: [display name],
+    <span class="hljs-attr">lang</span>: [language code],
+    <span class="hljs-attr">filter</span>: [optional: regex to define a filter, e.g. <span class="hljs-keyword">for</span> Giftinformation <span class="hljs-built_in">this</span> filters out everything after the first two words to enable searching only <span class="hljs-keyword">for</span> drugs]
+},
+</div></code></pre>
 <h2 id="examples">Examples</h2>
 <p>Here are two examples of valid url parameters both querying Google:</p>
 <ol>
@@ -298,6 +317,7 @@ This license permits reuse in any form as long as the original author and source
       }
 </script>
 ∏
+````
 
         <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
         

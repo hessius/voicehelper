@@ -131,6 +131,86 @@
         animation-name: bounceIn;
         animation-delay: 0.3s;
       }
+      @keyframes fade {
+        from {
+          opacity: 0;
+          transform: translate(-50%, -50%) scale(0.8);
+        }
+        to {
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(1);
+        }
+      }
+      .confirm *,
+      .confirm *:after,
+      .confirm *:before,
+      .confirm *::after,
+      .confirm *::before,
+      .confirm::after,
+      .confirm::before,
+      .confirm {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      .confirm {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        min-width: 280px;
+        max-width: 500px;
+        height: auto;
+        background: #e2e2e2;
+        border-radius: 10px;
+        padding: 0;
+        margin: 0;
+        border-top: 1px solid white;
+        animation: fade 1s ease 1 forwards;
+        font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light',
+          'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+      }
+      .confirm h1 {
+        text-align: center;
+        font-size: 1.2rem;
+        margin: 1.5rem 1rem 0.5rem;
+      }
+      .confirm p {
+        text-align: center;
+        font-size: 1rem;
+        margin: 0 2rem 4.5rem;
+      }
+      .confirm button {
+        background: transparent;
+        border: none;
+        color: #1678e5;
+        height: 3rem;
+        font-size: 1rem;
+        width: 50%;
+        position: absolute;
+        bottom: 0;
+        cursor: pointer;
+      }
+      .confirm button:nth-of-type(1) {
+        border-top: 1px solid #b4b4b4;
+        border-right: 1px solid #b4b4b4;
+        left: 0;
+        border-radius: 0 0 0 10px;
+      }
+      .confirm button:nth-of-type(2) {
+        border-top: 1px solid #b4b4b4;
+        right: 0;
+        border-radius: 0 0 10px 0;
+      }
+      .confirm button:focus,
+      .confirm button:hover {
+        font-weight: bold;
+        background: #efefef;
+      }
+      .confirm button:active {
+        background: #d6d6d6;
+      }
     </style>
   </head>
   <body>
@@ -297,7 +377,18 @@
           lang: 'sv'
         }
       }
-      let url, translate, slang, tlang, name, site, filter
+      let url, translate, slang, tlang, name, site, filter, blocked
+      let resultsArray = []
+      //function that receives a url and creates a link to it in the document, clicks the link and removes the link from the document
+      function openPopUp (urlToOpen) {
+        var popup_window = window.open(urlToOpen, '_blank')
+        try {
+          popup_window.focus()
+        } catch (e) {
+          // dialog confirm box if the popup is blocked by the browser and pressing ok opens the popup in a new tab
+          blocked = true
+        }
+      }
       document.addEventListener('DOMContentLoaded', function () {
         let urlParams = new URLSearchParams(window.location.search)
         site = urlParams.get('site')
@@ -335,6 +426,31 @@
           .addEventListener('submit', function (e) {
             e.preventDefault()
             submit()
+          })
+
+        document
+          .getElementById('cancelConfirm')
+          .addEventListener('click', function (e) {
+            e.preventDefault()
+            document.querySelector('.confirm').classList.add('hide')
+          })
+
+        document
+          .getElementById('confirmConfirm')
+          .addEventListener('click', function (e) {
+            e.preventDefault()
+            resultsArray.forEach(function (resulturl, index) {
+              console.log(index)
+              if (index === resultsArray.length - 1) {
+                setTimeout(function () {
+                  window.location.href = resulturl
+                }, (index + 1) * 100)
+              } else {
+                setTimeout(function () {
+                  window.open(resulturl, '_blank')
+                }, (index + 1) * 100)
+              }
+            })
           })
       })
       document.getElementById('submit').addEventListener('click', function (e) {
@@ -380,31 +496,71 @@
         e.stopPropagation()
         e.preventDefault()
         clipboardData = e.clipboardData || window.clipboardData
+        //split text on newlines
+        pastedDataArray = clipboardData.getData('Text').split('\n')
 
-        pastedData = clipboardData
-          .getData('Text')
-          .toLowerCase()
-          .trim()
-        if (filter) {
-          let regex = new RegExp(filter)
-          let match = regex.exec(pastedData)
-          if (match) {
-            pastedData = match[0]
-          }
-        }
-        if (pastedData && url) {
-          document.title = `Redirecting to ${name}`
+        //remove empty lines
+        pastedDataArray = pastedDataArray.filter(function (el) {
+          return el.length > 0
+        })
+        //reverse array to get last line first
+        pastedDataArray.reverse()
+        //loop over each item in pastedDataArray
+        pastedDataArray.forEach(function (item) {
+          if (item) {
+            //if item is the last item in array
 
-          if (translate) {
-            translateQuery(pastedData, slang, tlang)
-          } else {
-            url = url + pastedData
-            window.location.href = url
+            pastedData = item.toLowerCase().trim()
+
+            if (filter) {
+              let regex = new RegExp(filter)
+              let match = regex.exec(pastedData)
+              if (match) {
+                pastedData = match[0]
+              }
+            }
+
+            if (pastedData && url) {
+              document.title = `Redirecting to ${name}`
+
+              if (translate) {
+                translateQuery(pastedData, slang, tlang)
+              } else {
+                gotourl = url + pastedData
+                console.log(blocked)
+                if (item === pastedDataArray[pastedDataArray.length - 1]) {
+                  if (typeof blocked != undefined && blocked) {
+                    // show confirm div
+                    resultsArray.push(gotourl)
+                    document.querySelector('.confirm').classList.remove('hide')
+                  } else {
+                    window.location.href = gotourl
+                  }
+                } else {
+                  //add gotourl to resultsArray
+                  resultsArray.push(gotourl)
+                  //open url in new tab
+                  openPopUp(gotourl)
+                  //window.open(gotourl, '_blank')
+                }
+              }
+            } else {
+              showUI()
+            }
           }
-        } else {
-          showUI()
-        }
+        })
       }
+      // function that displays an alert box with the given message and opens google.com in a new tab when the user clicks OK
     </script>
+    <div class="confirm hide">
+      <h1>Open results</h1>
+      <p>
+        Multiple searches detected. Do you want to open the search results in a
+        multiple tabs? (Whitelist popups on voicehelper.io to enable automatic
+        opening of multiple results)
+      </p>
+      <button id="cancelConfirm">Cancel</button>
+      <button id="confirmConfirm" autofocus>Confirm</button>
+    </div>
   </body>
 </html>

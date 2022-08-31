@@ -11,11 +11,12 @@
    4. [How to use with DMO](#how-to-use-with-dmo)
    5. [Parameters](#parameters)
       1. [Predefined domains](#predefined-domains)
-   6. [Examples](#examples)
-   7. [Logo](#logo)
-   8. [Contact / Issues](#contact--issues)
-   9. [License](#license)
-   10. [Acknowledgements](#acknowledgements)
+   6. [How to add predefined domains](#how-to-add-predefined-domains)
+   7. [Examples](#examples)
+   8. [Logo](#logo)
+   9. [Contact / Issues](#contact--issues)
+   10. [License](#license)
+   11. [Acknowledgements](#acknowledgements)
 
 ## What is VoiceHelper?
 
@@ -70,6 +71,7 @@ Currently two parameters are available
 | Bing             | b     | bing            |             | General purpose search engine                                                       | Any      |
 | BDPM             | bdpm  |                 |             | Pharmaceutical information database, N.B. search performed through google           | French   |
 | FASS             | fass  |                 |             | Pharmaceutical information database                                                 | Swedish  |
+| Giftinformation  | gi    | giftinfo        |             | Swedish national toxicology database                                                | Swedish  |
 | Google           | g     | google          |             | General purpose search engine                                                       | Any      |
 | HAS              | has   |                 |             | Collection of databases with practice guidelines, pharmaceutical info etc           | French   |
 | ICD.nu           | icd   |                 |             | Coding search engine, covers diagnostic as well procedure codes                     | Swedish  |
@@ -82,6 +84,20 @@ Currently two parameters are available
 | Svensk MESH      | mesh  |                 |             | Medical dictionary with Swedish and English translations                            | Swedish  |
 | Uptodate         | u2d   | uptodate        | utd         | Large collection of medical information                                             | English  |
 | Vårdhandboken    | vhb   | vardhandboken   |             | Practical instructions re: medical procedures                                       | Swedish  |
+
+## How to add predefined domains
+
+Adding predefined domains is easy, just add the domain to the list in the index.html fiole and the service will automatically add it to available domains.
+The structure of the predefined domains is as follows:
+
+```js
+[param name]: {
+    url: [search url],
+    name: [display name],
+    lang: [language code],
+    filter: [optional: regex to define a filter, e.g. for Giftinformation this filters out everything after the first two words to enable searching only for drugs]
+},
+```
 
 ## Examples
 
@@ -129,3 +145,4 @@ The logotype used for this project is a remix of glyphs from [The Noun Project](
       }
 </script>
 ∏
+````
