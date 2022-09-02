@@ -132,11 +132,15 @@
         animation-delay: 0.3s;
       }
       @keyframes fade {
-        from {
+        0% {
           opacity: 0;
           transform: translate(-50%, -50%) scale(0.8);
         }
-        to {
+        50% {
+          opacity: 0;
+          transform: translate(-50%, -50%) scale(0.8);
+        }
+        100% {
           opacity: 1;
           transform: translate(-50%, -50%) scale(1);
         }
@@ -167,7 +171,7 @@
         padding: 0;
         margin: 0;
         border-top: 1px solid white;
-        animation: fade 1s ease 1 forwards;
+        animation: fade 1s ease-in-out 1 forwards;
         font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light',
           'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
       }
@@ -187,7 +191,7 @@
         color: #1678e5;
         height: 3rem;
         font-size: 1rem;
-        width: 50%;
+        width: 100%;
         position: absolute;
         bottom: 0;
         cursor: pointer;
@@ -429,13 +433,6 @@
           })
 
         document
-          .getElementById('cancelConfirm')
-          .addEventListener('click', function (e) {
-            e.preventDefault()
-            document.querySelector('.confirm').classList.add('hide')
-          })
-
-        document
           .getElementById('confirmConfirm')
           .addEventListener('click', function (e) {
             e.preventDefault()
@@ -491,10 +488,15 @@
           }, 100)
         }
       }
+      function clickConfirm () {
+        document.getElementById('confirmConfirm').click()
+      }
       function handlePaste (e) {
         var clipboardData, pastedData
         e.stopPropagation()
         e.preventDefault()
+        //set timeout 100 ms and then click confirmconmfirm button
+
         clipboardData = e.clipboardData || window.clipboardData
         //split text on newlines
         pastedDataArray = clipboardData.getData('Text').split('\n')
@@ -550,7 +552,11 @@
           }
         })
       }
-      // function that displays an alert box with the given message and opens google.com in a new tab when the user clicks OK
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'v') {
+          setTimeout(clickConfirm, 100)
+        }
+      })
     </script>
     <div class="confirm hide">
       <h1>Open results</h1>
@@ -559,8 +565,7 @@
         multiple tabs? (Whitelist popups on voicehelper.io to enable automatic
         opening of multiple results)
       </p>
-      <button id="cancelConfirm">Cancel</button>
-      <button id="confirmConfirm" autofocus>Confirm</button>
+      <button id="confirmConfirm" autofocus>Open</button>
     </div>
   </body>
 </html>

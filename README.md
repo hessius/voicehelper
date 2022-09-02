@@ -39,7 +39,7 @@ The service takes arguments from two fronts:
 
 **b)** from pasted text
 
-To use the service, when accessing this page you need to to provide a url parameter specifying a site that either matches a predefined search engine (see below) or is a valid url. If accessed with a valid url parameter the service can receive pasted text. The input from the URL parameters and the pasted text is combined to generate a complete search URL, to which the user is redirected. **While the process might sound complex this happens (almost) instantaneously and is (almost) invisible to the user.**
+To use the service, when accessing this page you need to to provide a url parameter specifying a site that either matches a predefined search engine (see below) or is a valid url. If accessed with a valid url parameter the service can receive pasted text. The input from the URL parameters and the pasted text is combined to generate a complete search URL, to which the user is redirected. Each new line of text will generate a new query, e.g. enabling the user to search a list of medications. **While the process might sound complex this happens (almost) instantaneously and is (almost) invisible to the user.**
 
 An additional feature to note is the ability to translate text strings so that e.g. a Swedish string can be converted into English to enable searching an English language resource.
 
