@@ -245,8 +245,7 @@
           name: 'Bing'
         },
         bdpm: {
-          url:
-            'https://www.google.com/search?q=site%3Ahttps%3A%2F%2Fbase-donnees-publique.medicaments.gouv.fr%2F+',
+          url: 'https://www.google.com/search?q=site%3Ahttps%3A%2F%2Fbase-donnees-publique.medicaments.gouv.fr%2F+',
           name: 'BASE DE DONNÉES PUBLIQUE DES MÉDICAMENTS',
           lang: 'fr'
         },
@@ -260,15 +259,13 @@
           name: 'Google'
         },
         gi: {
-          url:
-            'https://giftinformation.se/lakare/searchpage/?category=all&query=',
+          url: 'https://giftinformation.se/lakare/searchpage/?category=all&query=',
           name: 'Giftinfo',
           lang: 'sv',
           filter: /^[a-zA-Z0-9äöåÄÖÅ]+[\s]{1}[a-zA-Z0-9äöåÄÖÅ]+/
         },
         giftinfo: {
-          url:
-            'https://giftinformation.se/lakare/searchpage/?category=all&query=',
+          url: 'https://giftinformation.se/lakare/searchpage/?category=all&query=',
           name: 'Giftinfo',
           lang: 'sv',
           filter: /^[a-zA-Z0-9äöåÄÖÅ]+[\s]{1}[a-zA-Z0-9äöåÄÖÅ]+/
@@ -278,8 +275,7 @@
           name: 'Google'
         },
         has: {
-          url:
-            'https://www.has-sante.fr/jcms/fc_2875171/fr/resultat-de-recherche?text=',
+          url: 'https://www.has-sante.fr/jcms/fc_2875171/fr/resultat-de-recherche?text=',
           name: 'HAS',
           lang: 'fr'
         },
@@ -309,14 +305,12 @@
           lang: 'sv'
         },
         lakemedelsboken: {
-          url:
-            'https://lakemedelsboken.se/?iso=true&imo=false&nplId=null&search=',
+          url: 'https://lakemedelsboken.se/?iso=true&imo=false&nplId=null&search=',
           name: 'Läkemedelsboken',
           lang: 'sv'
         },
         lmb: {
-          url:
-            'https://lakemedelsboken.se/?iso=true&imo=false&nplId=null&search=',
+          url: 'https://lakemedelsboken.se/?iso=true&imo=false&nplId=null&search=',
           name: 'Läkemedelsboken',
           lang: 'sv'
         },
@@ -384,7 +378,7 @@
       let url, translate, slang, tlang, name, site, filter, blocked
       let resultsArray = []
       //function that receives a url and creates a link to it in the document, clicks the link and removes the link from the document
-      function openPopUp (urlToOpen) {
+      function openPopUp(urlToOpen) {
         var popup_window = window.open(urlToOpen, '_blank')
         try {
           popup_window.focus()
@@ -441,11 +435,11 @@
               if (index === resultsArray.length - 1) {
                 setTimeout(function () {
                   window.location.href = resulturl
-                }, (index + 1) * 100)
+                }, (index + 1) * 10000)
               } else {
                 setTimeout(function () {
                   window.open(resulturl, '_blank')
-                }, (index + 1) * 100)
+                }, (index + 1) * 10000)
               }
             })
           })
@@ -454,7 +448,7 @@
         e.preventDefault()
         submit()
       })
-      function submit () {
+      function submit() {
         let search = document.getElementById('searchform').elements[0]
         if (search.value) {
           console.log('Searching for: ' + search.value)
@@ -466,7 +460,7 @@
           }
         }
       }
-      function translateQuery (text, sourcelang, translationlang) {
+      function translateQuery(text, sourcelang, translationlang) {
         let translationurl = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sourcelang}&tl=${translationlang}&dt=t&q=${text}`
         fetch(translationurl)
           .then(response => response.json())
@@ -476,7 +470,7 @@
             window.location.href = url
           })
       }
-      function showUI () {
+      function showUI() {
         if (url) {
           document.querySelector('.hero').classList.remove('hide')
           setTimeout(function () {
@@ -488,10 +482,10 @@
           }, 100)
         }
       }
-      function clickConfirm () {
+      function clickConfirm() {
         document.getElementById('confirmConfirm').click()
       }
-      function handlePaste (e) {
+      function handlePaste(e) {
         var clipboardData, pastedData
         e.stopPropagation()
         e.preventDefault()
@@ -509,47 +503,50 @@
         pastedDataArray.reverse()
         //loop over each item in pastedDataArray
         pastedDataArray.forEach(function (item) {
-          if (item) {
-            //if item is the last item in array
+          setTimeout(function () {
+            if (item) {
+              //if item is the last item in array
+              pastedData = item.toLowerCase().trim()
 
-            pastedData = item.toLowerCase().trim()
-
-            if (filter) {
-              let regex = new RegExp(filter)
-              let match = regex.exec(pastedData)
-              if (match) {
-                pastedData = match[0]
-              }
-            }
-
-            if (pastedData && url) {
-              document.title = `Redirecting to ${name}`
-
-              if (translate) {
-                translateQuery(pastedData, slang, tlang)
-              } else {
-                gotourl = url + pastedData
-                console.log(blocked)
-                if (item === pastedDataArray[pastedDataArray.length - 1]) {
-                  if (typeof blocked != undefined && blocked) {
-                    // show confirm div
-                    resultsArray.push(gotourl)
-                    document.querySelector('.confirm').classList.remove('hide')
-                  } else {
-                    window.location.href = gotourl
-                  }
-                } else {
-                  //add gotourl to resultsArray
-                  resultsArray.push(gotourl)
-                  //open url in new tab
-                  openPopUp(gotourl)
-                  //window.open(gotourl, '_blank')
+              if (filter) {
+                let regex = new RegExp(filter)
+                let match = regex.exec(pastedData)
+                if (match) {
+                  pastedData = match[0]
                 }
               }
-            } else {
-              showUI()
+
+              if (pastedData && url) {
+                document.title = `Redirecting to ${name}`
+
+                if (translate) {
+                  translateQuery(pastedData, slang, tlang)
+                } else {
+                  gotourl = url + pastedData
+                  console.log(blocked)
+                  if (item === pastedDataArray[pastedDataArray.length - 1]) {
+                    if (typeof blocked != undefined && blocked) {
+                      // show confirm div
+                      resultsArray.push(gotourl)
+                      document
+                        .querySelector('.confirm')
+                        .classList.remove('hide')
+                    } else {
+                      window.location.href = gotourl
+                    }
+                  } else {
+                    //add gotourl to resultsArray
+                    resultsArray.push(gotourl)
+                    //open url in new tab
+                    openPopUp(gotourl)
+                    //window.open(gotourl, '_blank')
+                  }
+                }
+              } else {
+                showUI()
+              }
             }
-          }
+          }, 100)
         })
       }
       document.addEventListener('keydown', function (e) {
