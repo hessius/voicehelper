@@ -390,7 +390,9 @@
       document.addEventListener('DOMContentLoaded', function () {
         let urlParams = new URLSearchParams(window.location.search)
         site = urlParams.get('site')
+        site ? (site = site.toLowerCase()) : (null)
         slang = urlParams.get('lang')
+        slang ? (slang = slang.toLowerCase()) : (null)
         document.addEventListener('paste', handlePaste)
         if (site) {
           if (domainList[site]) {
