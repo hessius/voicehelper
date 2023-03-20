@@ -280,9 +280,10 @@
           lang: 'fr'
         },
         icd: {
-          url: 'http://icd.internetmedicin.se/',
+          url: 'https://verktyg.internetmedicin.se/koder',
           name: 'ICD.nu',
-          lang: 'sv'
+          lang: 'sv',
+          immediate: true
         },
         im: {
           url: 'https://www.internetmedicin.se/?s=',
@@ -399,9 +400,13 @@
             url = domainList[site].url
             name = domainList[site].name
             filter = domainList[site].filter
+            immediate = domainList[site].immediate
             //set placeholder for textinput in searchbox to "search" + name
             document.getElementById('searchBox').children[0].placeholder =
               'Search ' + name
+            if (immediate) {
+              window.location.href = url
+            }
             if (
               domainList[site].lang &&
               slang &&
