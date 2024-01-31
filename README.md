@@ -68,13 +68,13 @@ Currently two parameters are available
 
 | Name             | Param | Param alt       | Param alt 2 | Description                                                                         | Language |
 | ---------------- | ----- | --------------- | ----------- | ----------------------------------------------------------------------------------- | -------- |
+| AICD.nu          | aicd  | icd             |             | AI powered coding search engine, covers diagnostic as well procedure codes          | Swedish  |
 | Bing             | b     | bing            |             | General purpose search engine                                                       | Any      |
 | BDPM             | bdpm  |                 |             | Pharmaceutical information database, N.B. search performed through google           | French   |
 | FASS             | fass  |                 |             | Pharmaceutical information database                                                 | Swedish  |
 | Giftinformation  | gi    | giftinfo        |             | Swedish national toxicology database                                                | Swedish  |
 | Google           | g     | google          |             | General purpose search engine                                                       | Any      |
 | HAS              | has   |                 |             | Collection of databases with practice guidelines, pharmaceutical info etc           | French   |
-| ICD.nu           | icd   |                 |             | Coding search engine, covers diagnostic as well procedure codes                     | Swedish  |
 | Internetmedicin  | im    | internetmedicin |             | Swedish equivalent of Uptodate                                                      | Swedish  |
 | Janusinfo        | ji    | janusinfo       |             | Swedish National collection of emergency medicine resources and pharmaceutical info | Swedish  |
 | Läkemedelsboken  | lmb   | lakemedelsboken |             | Pharmaceutical guidelines                                                           | Swedish  |
