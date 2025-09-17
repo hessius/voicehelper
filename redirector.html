@@ -27,8 +27,6 @@
         const targetUrl = getUrlParam('url');
         if (targetUrl && /^https?:\/\//i.test(targetUrl)) {
           window.location.replace(targetUrl);
-        } else {
-          window.location.replace(defaultUrl);
         }
       }, 100);
     }, 50);
