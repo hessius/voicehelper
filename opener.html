@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Opener</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+  <script>
+    setTimeout(function () {
+      // Calculate bottom-right position
+      const width = 500;
+      const height = window.screen.availHeight;
+      const left = window.screen.availWidth - width;
+      const top = 0;
+
+      // Check for 'url' parameter in the current window's URL
+      const params = new URLSearchParams(window.location.search);
+      const targetUrl = params.get('url');
+      alert(targetUrl);
+      let redirectorUrl = "redirector.html";
+      if (targetUrl) {
+        redirectorUrl += `?url=${encodeURIComponent(targetUrl)}`;
+      }
+
+      // Open the redirector window
+      window.open(
+        redirectorUrl,
+        "RedirectWindow",
+        `width=${width},height=${height},left=${left},top=${top},resizable=no,scrollbars=yes,menubar=no,toolbar=no,location=no,status=no,titlebar=no`
+      );
+
+      window.close();
+    }, 100);
+  </script>
+</body>
+</html>

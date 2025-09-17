@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Redirecting…</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <noscript>
+    <meta http-equiv="refresh" content="0; url=https://m365.cloud.microsoft/chat/?titleId=T_7ee038d2-37a8-cbc3-8d86-d35f4bd577ef&amp;source=embedded-builder" />
+  </noscript>
+</head>
+<body>
+  <p>Redirecting… If nothing happens, <a href="https://m365.cloud.microsoft/chat/?titleId=T_7ee038d2-37a8-cbc3-8d86-d35f4bd577ef&amp;source=embedded-builder">click here</a>.</p>
+  <script>
+    function resizeToRightEdge() {
+      const width = 600;
+      const height = window.screen.availHeight;
+      const left = window.screen.availWidth - width;
+      const top = 0;
+      window.moveTo(left, top);
+      window.resizeTo(width, height);
+    }
+
+    function getUrlParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+
+    setTimeout(function () {
+      resizeToRightEdge();
+      setTimeout(function () {
+        const defaultUrl = "https://m365.cloud.microsoft/chat/?titleId=T_7ee038d2-37a8-cbc3-8d86-d35f4bd577ef&source=embedded-builder";
+        const targetUrl = getUrlParam('url');
+        if (targetUrl && /^https?:\/\//i.test(targetUrl)) {
+          window.location.replace(targetUrl);
+        } else {
+          window.location.replace(defaultUrl);
+        }
+      }, 100);
+    }, 50);
+  </script>
+</body>
+</html>
