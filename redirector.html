@@ -8,8 +8,9 @@
 <body>
   <script>
     function resizeToRightEdge() {
-      const width = 600;
-      const height = window.screen.availHeight;
+      const params = new URLSearchParams(window.location.search);
+      const width = parseInt(params.get('width')) || 600;
+      const height = parseInt(params.get('height')) || window.screen.availHeight;
       const left = window.screen.availWidth - width;
       const top = 0;
       window.moveTo(left, top);

@@ -9,18 +9,22 @@
   <script>
     setTimeout(function () {
       // Calculate bottom-right position
-      const width = 500;
-      const height = window.screen.availHeight;
-      const left = window.screen.availWidth - width;
-      const top = 0;
+  // Get width and height from url parameters if present, else use defaults
+  const params = new URLSearchParams(window.location.search);
+  const width = parseInt(params.get('width')) || 500;
+  const height = parseInt(params.get('height')) || window.screen.availHeight;
+  const left = window.screen.availWidth - width;
+  const top = 0;
 
-      // Check for 'url' parameter in the current window's URL
-      const params = new URLSearchParams(window.location.search);
+
+      // Build redirector url with url, width, and height parameters if present
       const targetUrl = params.get('url');
       let redirectorUrl = "redirector.html";
-      if (targetUrl) {
-        redirectorUrl += `?url=${encodeURIComponent(targetUrl)}`;
-      }
+      const redirectorParams = [];
+      if (targetUrl) redirectorParams.push(`url=${encodeURIComponent(targetUrl)}`);
+      if (params.get('width')) redirectorParams.push(`width=${encodeURIComponent(params.get('width'))}`);
+      if (params.get('height')) redirectorParams.push(`height=${encodeURIComponent(params.get('height'))}`);
+      if (redirectorParams.length > 0) redirectorUrl += `?${redirectorParams.join('&')}`;
 
       // Open the redirector window
       window.open(
