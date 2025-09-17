@@ -17,7 +17,6 @@
       // Check for 'url' parameter in the current window's URL
       const params = new URLSearchParams(window.location.search);
       const targetUrl = params.get('url');
-      alert(targetUrl);
       let redirectorUrl = "redirector.html";
       if (targetUrl) {
         redirectorUrl += `?url=${encodeURIComponent(targetUrl)}`;
@@ -31,7 +30,7 @@
       );
 
       window.close();
-    }, 100);
+    }, 50);
   </script>
 </body>
 </html>
