@@ -45,10 +45,12 @@
       padding: 15px;
       box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15),
         -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
-      text-align: center;
       font-size: 16px;
       cursor: pointer;
       transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      text-align: left;
     }
 
     .option:hover {
@@ -58,9 +60,18 @@
     }
 
     .option-number {
+      background: #007acc;
+      color: white;
       font-weight: bold;
-      color: #007acc;
-      margin-right: 10px;
+      font-size: 18px;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      flex-shrink: 0;
     }
 
     .option-title {
@@ -159,7 +170,7 @@
         
         const optionNumber = document.createElement('span');
         optionNumber.className = 'option-number';
-        optionNumber.textContent = `${i + 1}.`;
+        optionNumber.textContent = `${i + 1}`;
         
         const optionContent = document.createElement('div');
         
