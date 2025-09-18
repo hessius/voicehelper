@@ -382,31 +382,61 @@
             window.location.href = url
           })
       }
+      // Store unique URLs globally for site selection
+      let uniqueUrls = []
+      
       // a function to go through domainList and for each entry with unique url add a div with title and number to the sitelang div with the same class as the lang of the entry and add a click event to the div
       function addSiteList () {
         //filter domainlist to only have unique urls
-        let uniqueUrls = Object.values(domainList).filter(
+        uniqueUrls = Object.values(domainList).filter(
           (item, index, self) =>
             index === self.findIndex(t => t.url === item.url)
         )
         for (let key in uniqueUrls) {
           console.log(key)
           let div = document.createElement('div')
-          let url = uniqueUrls[key].url
+          let siteUrl = uniqueUrls[key].url
+          let siteName = uniqueUrls[key].name
           //variable to hold the position in the index + 1 to make it easier to read
           let pos = Number(key) + 1
           let lang = uniqueUrls[key].lang ? uniqueUrls[key].lang : 'any'
           div.className = `${lang} site`
           let sitelang = document.getElementsByClassName(`sitelang ${lang}`)
           console.log(div.className)
-          div.title = uniqueUrls[key].name
+          div.title = siteName
           console.log(div.title)
-          div.innerHTML = `${pos}. ${uniqueUrls[key].name}`
+          div.innerHTML = `${pos}. ${siteName}`
           console.log(div.innerHTML)
           div.addEventListener('click', function () {
-            console.log(url)
+            selectSite(pos)
           })
           sitelang[0].appendChild(div)
+        }
+      }
+      
+      // Function to select a site by number and transition to search interface
+      function selectSite(siteNumber) {
+        if (siteNumber >= 1 && siteNumber <= uniqueUrls.length) {
+          let selectedSite = uniqueUrls[siteNumber - 1]
+          url = selectedSite.url
+          name = selectedSite.name
+          console.log(`Selected site: ${name} (${url})`)
+          
+          // Hide site selector and show search interface
+          document.querySelector('.siteselect').classList.remove('show')
+          setTimeout(function () {
+            document.querySelector('.siteselect').classList.add('hide')
+            document.querySelector('.search').classList.remove('hide')
+            setTimeout(function () {
+              document.querySelector('.search').classList.add('show')
+              // Update placeholder text
+              document.getElementById('searchInput').placeholder = 'Search ' + name
+              // Set focus to search box
+              setTimeout(function () {
+                document.getElementById('searchInput').focus()
+              }, 300)
+            }, 100)
+          }, 500)
         }
       }
       function showUI () {
@@ -421,7 +451,10 @@
             }, 300)
           }, 100)
         } else {
-          addSiteList()
+          // Only add site list if not already added
+          if (uniqueUrls.length === 0) {
+            addSiteList()
+          }
           document.querySelector('.siteselect').classList.remove('hide')
           setTimeout(function () {
             document.querySelector('.siteselect').classList.add('show')
@@ -464,11 +497,74 @@
           showUI()
         }
       }
+      // Function to extract number from voice input
+      function extractNumberFromVoice(input) {
+        // Remove common Swedish and English voice command words and extract number
+        let cleanInput = input.toLowerCase().trim()
+        
+        // Handle phrases like "välj 4", "select 3", "number 5", etc.
+        let numberMatch = cleanInput.match(/(\d+)|(?:välj|select|number|choose)\s+(\d+)|(?:ett|one|1)|(?:två|two|2)|(?:tre|three|3)|(?:fyra|four|4)|(?:fem|five|5)|(?:sex|six|6)|(?:sju|seven|7)|(?:åtta|eight|8)|(?:nio|nine|9)|(?:tio|ten|10)|(?:elva|eleven|11)|(?:tolv|twelve|12)|(?:tretton|thirteen|13)/)
+        
+        if (numberMatch) {
+          // If direct digit found
+          if (numberMatch[1]) return parseInt(numberMatch[1])
+          if (numberMatch[2]) return parseInt(numberMatch[2])
+          
+          // Convert word numbers to digits
+          let wordToNumber = {
+            'ett': 1, 'one': 1, '1': 1,
+            'två': 2, 'two': 2, '2': 2,
+            'tre': 3, 'three': 3, '3': 3,
+            'fyra': 4, 'four': 4, '4': 4,
+            'fem': 5, 'five': 5, '5': 5,
+            'sex': 6, 'six': 6, '6': 6,
+            'sju': 7, 'seven': 7, '7': 7,
+            'åtta': 8, 'eight': 8, '8': 8,
+            'nio': 9, 'nine': 9, '9': 9,
+            'tio': 10, 'ten': 10, '10': 10,
+            'elva': 11, 'eleven': 11, '11': 11,
+            'tolv': 12, 'twelve': 12, '12': 12,
+            'tretton': 13, 'thirteen': 13, '13': 13
+          }
+          
+          for (let word in wordToNumber) {
+            if (cleanInput.includes(word)) {
+              return wordToNumber[word]
+            }
+          }
+        }
+        
+        // Try to extract any standalone number
+        let simpleNumber = cleanInput.match(/\d+/)
+        if (simpleNumber) {
+          return parseInt(simpleNumber[0])
+        }
+        
+        return null
+      }
+      
       function waitForInput () {
         setTimeout(function () {
-          let selectorInput = document.getElementById('selectorInput').value
-          if (selectorInput) {
-            alert(selectorInput)
+          let selectorInput = document.getElementById('selectorInput')
+          let inputValue = selectorInput.value
+          
+          if (inputValue) {
+            let extractedNumber = extractNumberFromVoice(inputValue)
+            
+            if (extractedNumber) {
+              console.log(`Extracted site number: ${extractedNumber}`)
+              // Clear the input field
+              selectorInput.value = ''
+              // Select the site
+              selectSite(extractedNumber)
+            } else {
+              console.log(`Could not extract number from: "${inputValue}"`)
+              // Clear invalid input after a short delay
+              setTimeout(function() {
+                selectorInput.value = ''
+              }, 1000)
+              waitForInput()
+            }
           } else {
             waitForInput()
           }
