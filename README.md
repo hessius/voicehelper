@@ -12,11 +12,12 @@
    5. [Parameters](#parameters)
       1. [Predefined domains](#predefined-domains)
    6. [How to add predefined domains](#how-to-add-predefined-domains)
-   7. [Examples](#examples)
-   8. [Logo](#logo)
-   9. [Contact / Issues](#contact--issues)
-   10. [License](#license)
-   11. [Acknowledgements](#acknowledgements)
+   7. [Utility Files](#utility-files)
+   8. [Examples](#examples)
+   9. [Logo](#logo)
+   10. [Contact / Issues](#contact--issues)
+   11. [License](#license)
+   12. [Acknowledgements](#acknowledgements)
 
 ## What is VoiceHelper?
 
@@ -98,6 +99,53 @@ The structure of the predefined domains is as follows:
     filter: [optional: regex to define a filter, e.g. for Giftinformation this filters out everything after the first two words to enable searching only for drugs]
 },
 ```
+
+## Utility Files
+
+VoiceHelper includes two utility HTML files that provide window positioning functionality for Dragon Medical One (DMO) integration:
+
+### opener.html
+
+The `opener.html` file is a utility that opens a positioned window containing `redirector.html`. It accepts URL parameters to control window positioning and passes them through to the redirector.
+
+#### Parameters
+- **url** (optional): The target URL to redirect to
+- **width** (optional): Window width in pixels (default: 500)
+- **height** (optional): Window height in pixels (default: full screen height)
+
+#### Functionality
+- Calculates positioning for the bottom-right corner of the screen
+- Opens a new window with `redirector.html` at the calculated position
+- Passes through any URL parameters to the redirector
+- Closes itself immediately after opening the new window
+
+#### Usage Example
+```
+opener.html?url=https://example.com&width=600&height=400
+```
+
+### redirector.html
+
+The `redirector.html` file positions itself to the right edge of the screen and redirects to a target URL. It's designed to work seamlessly with DMO's step-by-step commands.
+
+#### Parameters
+- **url** (required): The target URL to redirect to. Must be a valid HTTP/HTTPS URL
+- **width** (optional): Window width in pixels (default: 600)
+- **height** (optional): Window height in pixels (default: full screen height)
+
+#### Functionality
+- Positions the window to the right edge of the screen
+- Validates that the target URL is a valid HTTP/HTTPS URL for security
+- Redirects to the target URL after a brief delay (100ms)
+- Maintains the positioned window layout during the redirect
+
+#### Usage Example
+```
+redirector.html?url=https://example.com&width=800
+```
+
+#### Security Note
+The redirector validates URLs using a regex pattern to ensure only HTTP and HTTPS protocols are allowed, preventing potential security issues from javascript: or other protocol schemes.
 
 ## Examples
 
