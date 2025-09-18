@@ -202,39 +202,41 @@
       let cleanInput = input.toLowerCase().trim();
       
       // Handle phrases like "välj 4", "select 3", "number 5", etc.
-      let numberMatch = cleanInput.match(/(\d+)|(?:välj|select|number|choose)\s+(\d+)|(?:ett|one|1)|(?:två|two|2)|(?:tre|three|3)|(?:fyra|four|4)|(?:fem|five|5)|(?:sex|six|6)|(?:sju|seven|7)|(?:åtta|eight|8)|(?:nio|nine|9)|(?:tio|ten|10)|(?:elva|eleven|11)|(?:tolv|twelve|12)|(?:tretton|thirteen|13)/);
-      
-      if (numberMatch) {
-        // If direct digit found
-        if (numberMatch[1]) return parseInt(numberMatch[1]);
-        if (numberMatch[2]) return parseInt(numberMatch[2]);
-        
-        // Convert word numbers to digits
-        let wordToNumber = {
-          'ett': 1, 'one': 1, '1': 1,
-          'två': 2, 'two': 2, '2': 2,
-          'tre': 3, 'three': 3, '3': 3,
-          'fyra': 4, 'four': 4, '4': 4,
-          'fem': 5, 'five': 5, '5': 5,
-          'sex': 6, 'six': 6, '6': 6,
-          'sju': 7, 'seven': 7, '7': 7,
-          'åtta': 8, 'eight': 8, '8': 8,
-          'nio': 9, 'nine': 9, '9': 9,
-          'tio': 10, 'ten': 10, '10': 10,
-          'elva': 11, 'eleven': 11, '11': 11,
-          'tolv': 12, 'twelve': 12, '12': 12,
-          'tretton': 13, 'thirteen': 13, '13': 13
-        };
-        
-        for (let word in wordToNumber) {
-          if (cleanInput.includes(word)) {
-            return wordToNumber[word];
-          }
+      // First, check for direct digit (e.g., "4")
+      let digitMatch = cleanInput.match(/\b\d+\b/);
+      if (digitMatch) {
+        return parseInt(digitMatch[0]);
+      }
+
+      // Next, check for command phrases like "välj 4", "select 3", etc.
+      let commandMatch = cleanInput.match(/\b(?:välj|select|number|choose)\s+(\d+)\b/);
+      if (commandMatch && commandMatch[1]) {
+        return parseInt(commandMatch[1]);
+      }
+
+      // Map of number words to digits
+      const wordToNumber = {
+        'ett': 1, 'one': 1,
+        'två': 2, 'two': 2,
+        'tre': 3, 'three': 3,
+        'fyra': 4, 'four': 4,
+        'fem': 5, 'five': 5,
+        'sex': 6, 'six': 6,
+        'sju': 7, 'seven': 7,
+        'åtta': 8, 'eight': 8,
+        'nio': 9, 'nine': 9,
+        'tio': 10, 'ten': 10,
+        'elva': 11, 'eleven': 11,
+        'tolv': 12, 'twelve': 12,
+        'tretton': 13, 'thirteen': 13
+      };
+
+      // Check if any number word is present in the input
+      for (let word in wordToNumber) {
+        if (cleanInput.includes(word)) {
+          return wordToNumber[word];
         }
       }
-      
-      // Try to extract any standalone number
-      let simpleNumber = cleanInput.match(/\d+/);
       if (simpleNumber) {
         return parseInt(simpleNumber[0]);
       }
