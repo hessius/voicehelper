@@ -53,6 +53,7 @@
 </ol>
 </li>
 <li><a href="#how-to-add-predefined-domains">How to add predefined domains</a></li>
+<li><a href="#utility-files">Utility Files</a></li>
 <li><a href="#examples">Examples</a></li>
 <li><a href="#logo">Logo</a></li>
 <li><a href="#contact--issues">Contact / Issues</a></li>
@@ -249,6 +250,44 @@ The structure of the predefined domains is as follows:</p>
     <span class="hljs-attr">filter</span>: [optional: regex to define a filter, e.g. <span class="hljs-keyword">for</span> Giftinformation <span class="hljs-built_in">this</span> filters out everything after the first two words to enable searching only <span class="hljs-keyword">for</span> drugs]
 },
 </div></code></pre>
+<h2 id="utility-files">Utility Files</h2>
+<p>VoiceHelper includes two utility HTML files that provide window positioning functionality for Dragon Medical One (DMO) integration:</p>
+<h3 id="opener-html">opener.html</h3>
+<p>The <code>opener.html</code> file is a utility that opens a positioned window containing <code>redirector.html</code>. It accepts URL parameters to control window positioning and passes them through to the redirector.</p>
+<h4>Parameters</h4>
+<ul>
+<li><strong>url</strong> (optional): The target URL to redirect to</li>
+<li><strong>width</strong> (optional): Window width in pixels (default: 500)</li>
+<li><strong>height</strong> (optional): Window height in pixels (default: full screen height)</li>
+</ul>
+<h4>Functionality</h4>
+<ul>
+<li>Calculates positioning for the bottom-right corner of the screen</li>
+<li>Opens a new window with <code>redirector.html</code> at the calculated position</li>
+<li>Passes through any URL parameters to the redirector</li>
+<li>Closes itself immediately after opening the new window</li>
+</ul>
+<h4>Usage Example</h4>
+<pre><code>opener.html?url=https://example.com&amp;width=600&amp;height=400</code></pre>
+<h3 id="redirector-html">redirector.html</h3>
+<p>The <code>redirector.html</code> file positions itself to the right edge of the screen and redirects to a target URL. It's designed to work seamlessly with DMO's step-by-step commands.</p>
+<h4>Parameters</h4>
+<ul>
+<li><strong>url</strong> (required): The target URL to redirect to. Must be a valid HTTP/HTTPS URL</li>
+<li><strong>width</strong> (optional): Window width in pixels (default: 600)</li>
+<li><strong>height</strong> (optional): Window height in pixels (default: full screen height)</li>
+</ul>
+<h4>Functionality</h4>
+<ul>
+<li>Positions the window to the right edge of the screen</li>
+<li>Validates that the target URL is a valid HTTP/HTTPS URL for security</li>
+<li>Redirects to the target URL after a brief delay (100ms)</li>
+<li>Maintains the positioned window layout during the redirect</li>
+</ul>
+<h4>Usage Example</h4>
+<pre><code>redirector.html?url=https://example.com&amp;width=800</code></pre>
+<h4>Security Note</h4>
+<p>The redirector validates URLs using a regex pattern to ensure only HTTP and HTTPS protocols are allowed, preventing potential security issues from javascript: or other protocol schemes.</p>
 <h2 id="examples">Examples</h2>
 <p>Here are two examples of valid url parameters both querying Google:</p>
 <ol>
