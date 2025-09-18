@@ -56,6 +56,7 @@
       if (params.get('image')) redirectorParams.push(`image=${encodeURIComponent(params.get('image'))}`);
       if (params.get('width')) redirectorParams.push(`width=${encodeURIComponent(params.get('width'))}`);
       if (params.get('height')) redirectorParams.push(`height=${encodeURIComponent(params.get('height'))}`);
+      if (params.get('hideurl')) redirectorParams.push(`hideurl=${encodeURIComponent(params.get('hideurl'))}`);
       if (redirectorParams.length > 0) redirectorUrl += `?${redirectorParams.join('&')}`;
 
       // Open the redirector window
