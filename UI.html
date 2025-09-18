@@ -181,6 +181,10 @@
       </div>
     </div>
     <script>
+      // Constants for timeout values
+      const INPUT_CLEAR_DELAY = 1000; // Time to wait before clearing invalid input (ms)
+      const INPUT_POLLING_INTERVAL = 750; // Interval for checking input value (ms)
+
       if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
         location.replace(
           `https:${location.href.substring(location.protocol.length)}`
@@ -562,13 +566,13 @@
               // Clear invalid input after a short delay
               setTimeout(function() {
                 selectorInput.value = ''
-              }, 1000)
+              }, INPUT_CLEAR_DELAY)
               waitForInput()
             }
           } else {
             waitForInput()
           }
-        }, 750)
+        }, INPUT_POLLING_INTERVAL)
       }
       waitForInput()
     </script>
