@@ -17,11 +17,43 @@
   const top = 0;
 
 
-      // Build redirector url with url, width, and height parameters if present
+      // Build redirector url with url(s), titles, image, width, and height parameters if present
       const targetUrl = params.get('url');
       let redirectorUrl = "redirector.html";
       const redirectorParams = [];
-      if (targetUrl) redirectorParams.push(`url=${encodeURIComponent(targetUrl)}`);
+      
+      // Check for multiple URLs (url, url2, url3, etc.) and titles (title, title2, title3, etc.)
+      const urls = [];
+      const titles = [];
+      let urlIndex = 1;
+      
+      // First URL (can be just 'url' parameter)
+      if (targetUrl) {
+        urls.push(targetUrl);
+        titles.push(params.get('title') || '');
+      }
+      
+      // Additional URLs (url2, url3, etc.)
+      let nextUrl = params.get(`url${urlIndex + 1}`);
+      while (nextUrl) {
+        urls.push(nextUrl);
+        titles.push(params.get(`title${urlIndex + 1}`) || '');
+        urlIndex++;
+        nextUrl = params.get(`url${urlIndex + 1}`);
+      }
+      
+      // Pass URLs and titles to redirector
+      if (urls.length > 0) {
+        for (let i = 0; i < urls.length; i++) {
+          redirectorParams.push(`url${i === 0 ? '' : i + 1}=${encodeURIComponent(urls[i])}`);
+          if (titles[i]) {
+            redirectorParams.push(`title${i === 0 ? '' : i + 1}=${encodeURIComponent(titles[i])}`);
+          }
+        }
+      }
+      
+      // Pass image parameter if present
+      if (params.get('image')) redirectorParams.push(`image=${encodeURIComponent(params.get('image'))}`);
       if (params.get('width')) redirectorParams.push(`width=${encodeURIComponent(params.get('width'))}`);
       if (params.get('height')) redirectorParams.push(`height=${encodeURIComponent(params.get('height'))}`);
       if (redirectorParams.length > 0) redirectorUrl += `?${redirectorParams.join('&')}`;

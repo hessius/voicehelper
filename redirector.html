@@ -4,8 +4,97 @@
   <meta charset="utf-8" />
   <title>Redirecting…</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: 'Varela Round', sans-serif;
+    }
+
+    body {
+      background: #f5f7fd;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .selection-container {
+      width: 90%;
+      max-width: 600px;
+      text-align: center;
+    }
+
+    .image-container {
+      margin-bottom: 30px;
+    }
+
+    .image-container img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+    }
+
+    .option {
+      background: #f5f7fd;
+      border-radius: 10px;
+      margin: 10px 0;
+      padding: 15px;
+      box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15),
+        -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
+      text-align: center;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .option:hover {
+      transform: translateY(-2px);
+      box-shadow: 8px 8px 15px -1px rgba(0, 0, 0, 0.2),
+        -8px -8px 15px -1px rgba(255, 255, 255, 0.8);
+    }
+
+    .option-number {
+      font-weight: bold;
+      color: #007acc;
+      margin-right: 10px;
+    }
+
+    .option-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .option-url {
+      font-size: 14px;
+      color: #666;
+      word-break: break-all;
+    }
+
+    .hidden-input {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+    }
+
+    .hide {
+      display: none;
+    }
+  </style>
 </head>
 <body>
+  <input type="text" id="selectorInput" class="hidden-input" />
+  <div id="selectionContainer" class="selection-container hide">
+    <div id="imageContainer" class="image-container hide"></div>
+    <div id="optionsContainer"></div>
+  </div>
+
   <script>
     function resizeToRightEdge() {
       const params = new URLSearchParams(window.location.search);
@@ -22,12 +111,193 @@
       return params.get(name);
     }
 
+    function collectUrlsAndTitles() {
+      const params = new URLSearchParams(window.location.search);
+      const urls = [];
+      const titles = [];
+      
+      // First URL (can be just 'url' parameter)
+      const firstUrl = params.get('url');
+      if (firstUrl) {
+        urls.push(firstUrl);
+        titles.push(params.get('title') || '');
+      }
+      
+      // Additional URLs (url2, url3, etc.)
+      let urlIndex = 2;
+      let nextUrl = params.get(`url${urlIndex}`);
+      while (nextUrl) {
+        urls.push(nextUrl);
+        titles.push(params.get(`title${urlIndex}`) || '');
+        urlIndex++;
+        nextUrl = params.get(`url${urlIndex}`);
+      }
+      
+      return { urls, titles };
+    }
+
+    function createSelectionUI(urls, titles) {
+      const selectionContainer = document.getElementById('selectionContainer');
+      const optionsContainer = document.getElementById('optionsContainer');
+      const imageContainer = document.getElementById('imageContainer');
+      
+      // Add image if provided
+      const imageUrl = getUrlParam('image');
+      if (imageUrl) {
+        const img = document.createElement('img');
+        img.src = imageUrl;
+        img.alt = 'Logo';
+        imageContainer.appendChild(img);
+        imageContainer.classList.remove('hide');
+      }
+      
+      // Create options
+      for (let i = 0; i < urls.length; i++) {
+        const option = document.createElement('div');
+        option.className = 'option';
+        option.onclick = () => selectOption(i + 1);
+        
+        const optionNumber = document.createElement('span');
+        optionNumber.className = 'option-number';
+        optionNumber.textContent = `${i + 1}.`;
+        
+        const optionContent = document.createElement('div');
+        
+        if (titles[i]) {
+          const optionTitle = document.createElement('div');
+          optionTitle.className = 'option-title';
+          optionTitle.textContent = titles[i];
+          optionContent.appendChild(optionTitle);
+        }
+        
+        const optionUrl = document.createElement('div');
+        optionUrl.className = 'option-url';
+        optionUrl.textContent = urls[i];
+        optionContent.appendChild(optionUrl);
+        
+        option.appendChild(optionNumber);
+        option.appendChild(optionContent);
+        optionsContainer.appendChild(option);
+      }
+      
+      selectionContainer.classList.remove('hide');
+      document.getElementById('selectorInput').focus();
+      
+      // Start listening for input
+      waitForInput(urls);
+    }
+
+    function selectOption(optionNumber) {
+      const { urls } = collectUrlsAndTitles();
+      if (optionNumber >= 1 && optionNumber <= urls.length) {
+        const selectedUrl = urls[optionNumber - 1];
+        if (selectedUrl && /^https?:\/\//i.test(selectedUrl)) {
+          window.location.replace(selectedUrl);
+        }
+      }
+    }
+
+    function extractNumberFromVoice(input) {
+      // Remove common Swedish and English voice command words and extract number
+      let cleanInput = input.toLowerCase().trim();
+      
+      // Handle phrases like "välj 4", "select 3", "number 5", etc.
+      let numberMatch = cleanInput.match(/(\d+)|(?:välj|select|number|choose)\s+(\d+)|(?:ett|one|1)|(?:två|two|2)|(?:tre|three|3)|(?:fyra|four|4)|(?:fem|five|5)|(?:sex|six|6)|(?:sju|seven|7)|(?:åtta|eight|8)|(?:nio|nine|9)|(?:tio|ten|10)|(?:elva|eleven|11)|(?:tolv|twelve|12)|(?:tretton|thirteen|13)/);
+      
+      if (numberMatch) {
+        // If direct digit found
+        if (numberMatch[1]) return parseInt(numberMatch[1]);
+        if (numberMatch[2]) return parseInt(numberMatch[2]);
+        
+        // Convert word numbers to digits
+        let wordToNumber = {
+          'ett': 1, 'one': 1, '1': 1,
+          'två': 2, 'two': 2, '2': 2,
+          'tre': 3, 'three': 3, '3': 3,
+          'fyra': 4, 'four': 4, '4': 4,
+          'fem': 5, 'five': 5, '5': 5,
+          'sex': 6, 'six': 6, '6': 6,
+          'sju': 7, 'seven': 7, '7': 7,
+          'åtta': 8, 'eight': 8, '8': 8,
+          'nio': 9, 'nine': 9, '9': 9,
+          'tio': 10, 'ten': 10, '10': 10,
+          'elva': 11, 'eleven': 11, '11': 11,
+          'tolv': 12, 'twelve': 12, '12': 12,
+          'tretton': 13, 'thirteen': 13, '13': 13
+        };
+        
+        for (let word in wordToNumber) {
+          if (cleanInput.includes(word)) {
+            return wordToNumber[word];
+          }
+        }
+      }
+      
+      // Try to extract any standalone number
+      let simpleNumber = cleanInput.match(/\d+/);
+      if (simpleNumber) {
+        return parseInt(simpleNumber[0]);
+      }
+      
+      return null;
+    }
+
+    function waitForInput(urls) {
+      setTimeout(function () {
+        let selectorInput = document.getElementById('selectorInput');
+        let inputValue = selectorInput.value;
+        
+        if (inputValue) {
+          let extractedNumber = extractNumberFromVoice(inputValue);
+          
+          if (extractedNumber) {
+            console.log(`Extracted option number: ${extractedNumber}`);
+            // Clear the input field
+            selectorInput.value = '';
+            // Select the option
+            selectOption(extractedNumber);
+          } else {
+            console.log(`Could not extract number from: "${inputValue}"`);
+            // Clear invalid input after a short delay
+            setTimeout(function() {
+              selectorInput.value = '';
+            }, 1000);
+            waitForInput(urls);
+          }
+        } else {
+          waitForInput(urls);
+        }
+      }, 750);
+    }
+
+    // Handle keyboard input for direct number selection
+    document.addEventListener('keydown', function(event) {
+      const { urls } = collectUrlsAndTitles();
+      const number = parseInt(event.key);
+      if (number >= 1 && number <= urls.length) {
+        selectOption(number);
+      }
+    });
+
     setTimeout(function () {
       resizeToRightEdge();
       setTimeout(function () {
-        const targetUrl = getUrlParam('url');
-        if (targetUrl && /^https?:\/\//i.test(targetUrl)) {
-          window.location.replace(targetUrl);
+        const { urls, titles } = collectUrlsAndTitles();
+        
+        if (urls.length === 0) {
+          // No URLs provided - show error or close
+          document.body.innerHTML = '<div style="text-align: center; margin-top: 50px; font-family: Arial;">No URLs provided</div>';
+          return;
+        } else if (urls.length === 1) {
+          // Single URL - redirect immediately (original behavior)
+          const targetUrl = urls[0];
+          if (targetUrl && /^https?:\/\//i.test(targetUrl)) {
+            window.location.replace(targetUrl);
+          }
+        } else {
+          // Multiple URLs - show selection UI
+          document.title = 'Select Option';
+          createSelectionUI(urls, titles);
         }
       }, 100);
     }, 50);
