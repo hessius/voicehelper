@@ -4,9 +4,80 @@
   <meta charset="utf-8" />
   <title>Opener</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+  </style>
 </head>
 <body>
   <script>
+    function handleCloseFailure() {
+      // When window.close() fails, provide user-friendly feedback
+      document.body.innerHTML = `
+        <div style="
+          font-family: 'Varela Round', Arial, sans-serif;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 100vh;
+          background: #f5f7fd;
+          text-align: center;
+          padding: 20px;
+          box-sizing: border-box;
+        ">
+          <div style="
+            background: #f5f7fd;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15),
+                        -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
+            max-width: 400px;
+            margin: 20px;
+          ">
+            <div style="font-size: 48px; margin-bottom: 20px;">✅</div>
+            <h2 style="color: #333; margin-bottom: 10px; font-size: 20px;">Window Opened</h2>
+            <p style="color: #666; margin-bottom: 20px; line-height: 1.4;">
+              The redirector window has been opened successfully. You can close this tab manually.
+            </p>
+            <button onclick="attemptClose()" style="
+              background: #007acc;
+              color: white;
+              border: none;
+              padding: 12px 24px;
+              border-radius: 10px;
+              font-size: 16px;
+              cursor: pointer;
+              font-family: inherit;
+              margin: 5px;
+            ">Try Close Again</button>
+            <button onclick="goBack()" style="
+              background: #666;
+              color: white;
+              border: none;
+              padding: 12px 24px;
+              border-radius: 10px;
+              font-size: 16px;
+              cursor: pointer;
+              font-family: inherit;
+              margin: 5px;
+            ">Go Back</button>
+          </div>
+        </div>
+      `;
+    }
+    
+    function attemptClose() {
+      window.close();
+    }
+    
+    function goBack() {
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.close();
+      }
+    }
+    
     setTimeout(function () {
       // Calculate bottom-right position
   // Get width and height from url parameters if present, else use defaults
@@ -65,7 +136,22 @@
         `width=${width},height=${height},left=${left},top=${top},resizable=no,scrollbars=yes,menubar=no,toolbar=no,location=no,status=no,titlebar=no`
       );
 
-      window.close();
+      // Try to close the window. If it fails (due to browser security restrictions),
+      // provide alternative behaviors for better user experience
+      try {
+        window.close();
+      } catch (e) {
+        console.warn('Could not close window:', e);
+        handleCloseFailure();
+      }
+      
+      // If close() didn't work (common when window wasn't opened by script),
+      // we need a fallback. Check if window is still open after a short delay
+      setTimeout(() => {
+        if (!window.closed) {
+          handleCloseFailure();
+        }
+      }, 100);
     }, 50);
   </script>
 </body>
