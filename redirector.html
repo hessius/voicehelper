@@ -152,6 +152,9 @@
       const optionsContainer = document.getElementById('optionsContainer');
       const imageContainer = document.getElementById('imageContainer');
       
+      // Check if URLs should be hidden
+      const hideUrl = getUrlParam('hideurl') === 'true';
+      
       // Add image if provided
       const imageUrl = getUrlParam('image');
       if (imageUrl) {
@@ -181,10 +184,13 @@
           optionContent.appendChild(optionTitle);
         }
         
-        const optionUrl = document.createElement('div');
-        optionUrl.className = 'option-url';
-        optionUrl.textContent = urls[i];
-        optionContent.appendChild(optionUrl);
+        // Only add URL display if hideurl is not true
+        if (!hideUrl) {
+          const optionUrl = document.createElement('div');
+          optionUrl.className = 'option-url';
+          optionUrl.textContent = urls[i];
+          optionContent.appendChild(optionUrl);
+        }
         
         option.appendChild(optionNumber);
         option.appendChild(optionContent);
