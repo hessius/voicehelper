@@ -1456,6 +1456,11 @@
     <h4>Parameters</h4>
     <ul>
       <li><strong>url</strong> (optional): The target URL to redirect to</li>
+      <li><strong>url2, url3, etc.</strong> (optional): Additional URLs for multi-option selection</li>
+      <li><strong>title</strong> (optional): Display title for the first URL</li>
+      <li><strong>title2, title3, etc.</strong> (optional): Display titles for additional URLs</li>
+      <li><strong>image</strong> (optional): URL to an image to display in the selection interface</li>
+      <li><strong>hideurl</strong> (optional): Set to "true" to hide URL display in the selection interface</li>
       <li><strong>width</strong> (optional): Window width in pixels (default: 500)</li>
       <li><strong>height</strong> (optional): Window height in pixels (default: full screen height)</li>
     </ul>
@@ -1463,40 +1468,104 @@
     <ul>
       <li>Calculates positioning for the bottom-right corner of the screen</li>
       <li>Opens a new window with <code>redirector.html</code> at the calculated position</li>
-      <li>Passes through any URL parameters to the redirector</li>
+      <li>Supports multiple URLs for creating selection interfaces</li>
+      <li>Passes through all URL parameters to the redirector</li>
       <li>Closes itself immediately after opening the new window</li>
+      <li>Provides fallback UI with user-friendly options if window closing fails</li>
     </ul>
-    <h4>Usage Example</h4>
+    <h4>Usage Examples</h4>
+    <p><strong>Single URL redirect:</strong></p>
     <pre><code>opener.html?url=https://example.com&amp;width=600&amp;height=400</code></pre>
+    
+    <p><strong>Multiple URL selection with titles:</strong></p>
+    <pre><code>opener.html?url=https://site1.com&amp;url2=https://site2.com&amp;title=First%20Site&amp;title2=Second%20Site</code></pre>
+    
+    <p><strong>Multiple URLs with image and hidden URLs:</strong></p>
+    <pre><code>opener.html?url=https://site1.com&amp;url2=https://site2.com&amp;title=Option%201&amp;title2=Option%202&amp;image=https://example.com/logo.png&amp;hideurl=true</code></pre>
+    
+    <h4>Error Handling</h4>
+    <p>
+      When the window cannot be closed automatically (due to browser security restrictions), 
+      opener.html provides a user-friendly interface with options to:
+    </p>
+    <ul>
+      <li>Try closing again</li>
+      <li>Navigate back to the previous page</li>
+      <li>Manual instructions for closing the tab</li>
+    </ul>
     
     <h3 id="redirector-html">redirector.html</h3>
     <p>
       The <code>redirector.html</code> file positions itself to the right edge of 
-      the screen and redirects to a target URL. It's designed to work seamlessly 
-      with DMO's step-by-step commands.
+      the screen and either redirects to a target URL or presents a selection interface 
+      for multiple URLs. It's designed to work seamlessly with DMO's step-by-step 
+      commands and supports voice commands for option selection.
     </p>
     <h4>Parameters</h4>
     <ul>
-      <li><strong>url</strong> (required): The target URL to redirect to. Must be a valid HTTP/HTTPS URL</li>
+      <li><strong>url</strong> (required for single redirect): The target URL to redirect to. Must be a valid HTTP/HTTPS URL</li>
+      <li><strong>url2, url3, etc.</strong> (optional): Additional URLs for multi-option selection</li>
+      <li><strong>title</strong> (optional): Display title for the first URL option</li>
+      <li><strong>title2, title3, etc.</strong> (optional): Display titles for additional URL options</li>
+      <li><strong>image</strong> (optional): URL to an image to display above the selection options</li>
+      <li><strong>hideurl</strong> (optional): Set to "true" to hide URL display in selection interface</li>
       <li><strong>width</strong> (optional): Window width in pixels (default: 600)</li>
       <li><strong>height</strong> (optional): Window height in pixels (default: full screen height)</li>
     </ul>
-    <h4>Functionality</h4>
+    <h4>Single URL Functionality</h4>
+    <p>When only one URL is provided:</p>
     <ul>
       <li>Positions the window to the right edge of the screen</li>
       <li>Validates that the target URL is a valid HTTP/HTTPS URL for security</li>
       <li>Redirects to the target URL after a brief delay (100ms)</li>
       <li>Maintains the positioned window layout during the redirect</li>
     </ul>
-    <h4>Usage Example</h4>
+    <h4>Multiple URL Selection Functionality</h4>
+    <p>When multiple URLs are provided:</p>
+    <ul>
+      <li>Creates a numbered selection interface with clickable options</li>
+      <li>Displays titles for each option (if provided)</li>
+      <li>Shows or hides URLs based on the <code>hideurl</code> parameter</li>
+      <li>Displays an optional image at the top of the selection interface</li>
+      <li>Supports voice command selection in both Swedish and English</li>
+      <li>Supports direct keyboard number selection (1-9)</li>
+    </ul>
+    <h4>Voice Command Support</h4>
+    <p>The redirector recognizes various voice command patterns:</p>
+    <ul>
+      <li><strong>Direct numbers</strong>: "4", "5" (any digit)</li>
+      <li><strong>Swedish commands</strong>: "välj 3" (select 3)</li>
+      <li><strong>English commands</strong>: "select 2", "number 4", "choose 1"</li>
+      <li><strong>Number words</strong>: "two", "three", "fyra", "fem" (supports 1-13 in both languages)</li>
+    </ul>
+    <h4>Keyboard Navigation</h4>
+    <ul>
+      <li>Press number keys (1-9) to directly select options</li>
+      <li>Options are highlighted on hover for visual feedback</li>
+    </ul>
+    <h4>Usage Examples</h4>
+    <p><strong>Single URL redirect:</strong></p>
     <pre><code>redirector.html?url=https://example.com&amp;width=800</code></pre>
+    
+    <p><strong>Multiple URL selection with titles:</strong></p>
+    <pre><code>redirector.html?url=https://site1.com&amp;url2=https://site2.com&amp;title=Primary%20Site&amp;title2=Secondary%20Site</code></pre>
+    
+    <p><strong>Multiple URLs with image and hidden URLs:</strong></p>
+    <pre><code>redirector.html?url=https://medical1.com&amp;url2=https://medical2.com&amp;url3=https://medical3.com&amp;title=Database%20A&amp;title2=Database%20B&amp;title3=Database%20C&amp;image=https://example.com/medical-logo.png&amp;hideurl=true</code></pre>
     
     <h4>Security Note</h4>
     <p>
-      The redirector validates URLs using a regex pattern to ensure only HTTP and 
+      The redirector validates all URLs using a regex pattern to ensure only HTTP and 
       HTTPS protocols are allowed, preventing potential security issues from 
       javascript: or other protocol schemes.
     </p>
+    <h4>Integration with Dragon Medical One</h4>
+    <p>The multiple URL selection feature is particularly useful for DMO integration where users can:</p>
+    <ol>
+      <li>Say "opener medical databases" to open the selection interface</li>
+      <li>Say "select 2" or "välj 3" to choose from multiple medical databases</li>
+      <li>Have immediate access to their chosen resource without manual navigation</li>
+    </ol>
     <h2 id="examples">Examples</h2>
     <p>Here are two examples of valid url parameters both querying Google:</p>
     <ol>

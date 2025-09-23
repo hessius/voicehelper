@@ -110,42 +110,111 @@ The `opener.html` file is a utility that opens a positioned window containing `r
 
 #### Parameters
 - **url** (optional): The target URL to redirect to
+- **url2, url3, etc.** (optional): Additional URLs for multi-option selection
+- **title** (optional): Display title for the first URL
+- **title2, title3, etc.** (optional): Display titles for additional URLs
+- **image** (optional): URL to an image to display in the selection interface
+- **hideurl** (optional): Set to "true" to hide URL display in the selection interface
 - **width** (optional): Window width in pixels (default: 500)
 - **height** (optional): Window height in pixels (default: full screen height)
 
 #### Functionality
 - Calculates positioning for the bottom-right corner of the screen
 - Opens a new window with `redirector.html` at the calculated position
-- Passes through any URL parameters to the redirector
+- Supports multiple URLs for creating selection interfaces
+- Passes through all URL parameters to the redirector
 - Closes itself immediately after opening the new window
+- Provides fallback UI with user-friendly options if window closing fails
 
-#### Usage Example
+#### Usage Examples
+
+**Single URL redirect:**
 ```
 opener.html?url=https://example.com&width=600&height=400
 ```
 
+**Multiple URL selection with titles:**
+```
+opener.html?url=https://site1.com&url2=https://site2.com&title=First%20Site&title2=Second%20Site
+```
+
+**Multiple URLs with image and hidden URLs:**
+```
+opener.html?url=https://site1.com&url2=https://site2.com&title=Option%201&title2=Option%202&image=https://example.com/logo.png&hideurl=true
+```
+
+#### Error Handling
+When the window cannot be closed automatically (due to browser security restrictions), opener.html provides a user-friendly interface with options to:
+- Try closing again
+- Navigate back to the previous page
+- Manual instructions for closing the tab
+
 ### redirector.html
 
-The `redirector.html` file positions itself to the right edge of the screen and redirects to a target URL. It's designed to work seamlessly with DMO's step-by-step commands.
+The `redirector.html` file positions itself to the right edge of the screen and either redirects to a target URL or presents a selection interface for multiple URLs. It's designed to work seamlessly with DMO's step-by-step commands and supports voice commands for option selection.
 
 #### Parameters
-- **url** (required): The target URL to redirect to. Must be a valid HTTP/HTTPS URL
+- **url** (required for single redirect): The target URL to redirect to. Must be a valid HTTP/HTTPS URL
+- **url2, url3, etc.** (optional): Additional URLs for multi-option selection
+- **title** (optional): Display title for the first URL option
+- **title2, title3, etc.** (optional): Display titles for additional URL options
+- **image** (optional): URL to an image to display above the selection options
+- **hideurl** (optional): Set to "true" to hide URL display in selection interface
 - **width** (optional): Window width in pixels (default: 600)
 - **height** (optional): Window height in pixels (default: full screen height)
 
-#### Functionality
+#### Single URL Functionality
+When only one URL is provided:
 - Positions the window to the right edge of the screen
 - Validates that the target URL is a valid HTTP/HTTPS URL for security
 - Redirects to the target URL after a brief delay (100ms)
 - Maintains the positioned window layout during the redirect
 
-#### Usage Example
+#### Multiple URL Selection Functionality
+When multiple URLs are provided:
+- Creates a numbered selection interface with clickable options
+- Displays titles for each option (if provided)
+- Shows or hides URLs based on the `hideurl` parameter
+- Displays an optional image at the top of the selection interface
+- Supports voice command selection in both Swedish and English
+- Supports direct keyboard number selection (1-9)
+
+#### Voice Command Support
+The redirector recognizes various voice command patterns:
+- **Direct numbers**: "4", "5" (any digit)
+- **Swedish commands**: "välj 3" (select 3)
+- **English commands**: "select 2", "number 4", "choose 1"
+- **Number words**: "two", "three", "fyra", "fem" (supports 1-13 in both languages)
+
+#### Keyboard Navigation
+- Press number keys (1-9) to directly select options
+- Options are highlighted on hover for visual feedback
+
+#### Usage Examples
+
+**Single URL redirect:**
 ```
 redirector.html?url=https://example.com&width=800
 ```
 
+**Multiple URL selection with titles:**
+```
+redirector.html?url=https://site1.com&url2=https://site2.com&title=Primary%20Site&title2=Secondary%20Site
+```
+
+**Multiple URLs with image and hidden URLs:**
+```
+redirector.html?url=https://medical1.com&url2=https://medical2.com&url3=https://medical3.com&title=Database%20A&title2=Database%20B&title3=Database%20C&image=https://example.com/medical-logo.png&hideurl=true
+```
+
 #### Security Note
-The redirector validates URLs using a regex pattern to ensure only HTTP and HTTPS protocols are allowed, preventing potential security issues from javascript: or other protocol schemes.
+The redirector validates all URLs using a regex pattern to ensure only HTTP and HTTPS protocols are allowed, preventing potential security issues from javascript: or other protocol schemes.
+
+#### Integration with Dragon Medical One
+The multiple URL selection feature is particularly useful for DMO integration where users can:
+1. Say "opener medical databases" to open the selection interface
+2. Say "select 2" or "välj 3" to choose from multiple medical databases
+3. Have immediate access to their chosen resource without manual navigation
 
 ## Examples
 
