@@ -329,8 +329,9 @@
       // Collect URLs and titles
       const urlEntries = document.querySelectorAll('.url-entry');
       urlEntries.forEach((entry, index) => {
-        const urlInput = entry.querySelector(`#url${index}`);
-        const titleInput = entry.querySelector(`#title${index}`);
+        const dataIndex = entry.getAttribute('data-index') || index;
+        const urlInput = document.getElementById(`url${dataIndex}`);
+        const titleInput = document.getElementById(`title${dataIndex}`);
         
         if (urlInput && urlInput.value.trim()) {
           hasValidUrl = true;
@@ -396,11 +397,11 @@
       urlCount++;
       
       // Add event listeners to new inputs
-      const urlInput = urlEntry.querySelector(`#url${newIndex}`);
-      const titleInput = urlEntry.querySelector(`#title${newIndex}`);
+      const urlInput = document.getElementById(`url${newIndex}`);
+      const titleInput = document.getElementById(`title${newIndex}`);
       
-      urlInput.addEventListener('input', updateGeneratedUrl);
-      titleInput.addEventListener('input', updateGeneratedUrl);
+      if (urlInput) urlInput.addEventListener('input', updateGeneratedUrl);
+      if (titleInput) titleInput.addEventListener('input', updateGeneratedUrl);
       
       updateGeneratedUrl();
     }
