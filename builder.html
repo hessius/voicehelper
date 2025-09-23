@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>VoiceHelper - Opener/Redirector URL Builder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: 'Varela Round', sans-serif;
+    }
+
+    body {
+      background: #f5f7fd;
+      min-height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #666;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .docs-link {
+      color: #007acc;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .docs-link:hover {
+      text-decoration: underline;
+    }
+
+    .builder-form {
+      background: #f5f7fd;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15),
+                  -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
+      margin-bottom: 30px;
+    }
+
+    .form-section {
+      margin-bottom: 25px;
+    }
+
+    .form-section h3 {
+      color: #333;
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      color: #333;
+      font-size: 14px;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input[type="text"], input[type="number"], input[type="url"] {
+      width: 100%;
+      padding: 12px 15px;
+      border: none;
+      border-radius: 10px;
+      background: #f5f7fd;
+      box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.1),
+                  inset -3px -3px 6px rgba(255, 255, 255, 0.8);
+      font-family: inherit;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    input[type="text"]:focus, input[type="number"]:focus, input[type="url"]:focus {
+      outline: none;
+      box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.15),
+                  inset -3px -3px 6px rgba(255, 255, 255, 0.9);
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      border-radius: 5px;
+      background: #f5f7fd;
+      box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.1),
+                  inset -2px -2px 4px rgba(255, 255, 255, 0.8);
+      border: none;
+      cursor: pointer;
+    }
+
+    .url-entry {
+      background: #f0f2f8;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 10px;
+      box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.1),
+                  inset -2px -2px 4px rgba(255, 255, 255, 0.8);
+    }
+
+    .url-entry h4 {
+      color: #333;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .url-fields {
+      display: grid;
+      grid-template-columns: 2fr 1fr auto;
+      gap: 10px;
+      align-items: end;
+    }
+
+    .remove-btn {
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 15px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 14px;
+      box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15),
+                  -3px -3px 6px rgba(255, 255, 255, 0.7);
+    }
+
+    .remove-btn:hover {
+      background: #ff5252;
+      transform: translateY(-1px);
+    }
+
+    .add-url-btn, .copy-btn {
+      background: #007acc;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 20px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: bold;
+      box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15),
+                  -3px -3px 6px rgba(255, 255, 255, 0.7);
+      margin-top: 10px;
+    }
+
+    .add-url-btn:hover, .copy-btn:hover {
+      background: #0056b3;
+      transform: translateY(-1px);
+    }
+
+    .dimension-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .generated-url {
+      background: #f5f7fd;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15),
+                  -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
+    }
+
+    .generated-url h3 {
+      color: #333;
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    .url-display {
+      background: #e8eaf0;
+      border-radius: 8px;
+      padding: 15px;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      word-break: break-all;
+      color: #333;
+      margin-bottom: 15px;
+      max-height: 100px;
+      overflow-y: auto;
+      box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.1),
+                  inset -2px -2px 4px rgba(255, 255, 255, 0.8);
+    }
+
+    .copy-success {
+      color: #4caf50;
+      font-size: 14px;
+      margin-left: 10px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .copy-success.show {
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .url-fields {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      
+      .dimension-group {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="logo/SVG/logo.svg" alt="VoiceHelper Logo" class="logo">
+      <h1>Opener/Redirector URL Builder</h1>
+      <p class="subtitle">Generate URLs for the VoiceHelper opener and redirector functionality</p>
+      <a href="docs.html" class="docs-link">📖 View Documentation</a>
+    </div>
+
+    <div class="builder-form">
+      <div class="form-section">
+        <h3>URLs & Titles</h3>
+        <div id="urlContainer">
+          <div class="url-entry" data-index="0">
+            <h4>URL 1</h4>
+            <div class="url-fields">
+              <div class="form-group">
+                <label for="url0">URL *</label>
+                <input type="url" id="url0" placeholder="https://example.com" required>
+              </div>
+              <div class="form-group">
+                <label for="title0">Title</label>
+                <input type="text" id="title0" placeholder="Optional title">
+              </div>
+              <div></div>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="add-url-btn" onclick="addUrlField()">+ Add URL</button>
+      </div>
+
+      <div class="form-section">
+        <h3>Window Settings</h3>
+        <div class="dimension-group">
+          <div class="form-group">
+            <label for="width">Width (px)</label>
+            <input type="number" id="width" placeholder="500" min="200" max="1920">
+          </div>
+          <div class="form-group">
+            <label for="height">Height (px)</label>
+            <input type="number" id="height" placeholder="Auto" min="100" max="1080">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Display Options</h3>
+        <div class="form-group">
+          <label for="image">Image URL</label>
+          <input type="url" id="image" placeholder="https://example.com/logo.png">
+        </div>
+        <div class="form-group">
+          <div class="checkbox-group">
+            <input type="checkbox" id="hideurl">
+            <label for="hideurl">Hide URLs in selection UI</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="generated-url">
+      <h3>Generated URL</h3>
+      <div class="url-display" id="generatedUrl">
+        Enter at least one URL to generate the opener URL...
+      </div>
+      <button type="button" class="copy-btn" onclick="copyToClipboard()">
+        📋 Copy to Clipboard
+      </button>
+      <span class="copy-success" id="copySuccess">✓ Copied!</span>
+    </div>
+  </div>
+
+  <script>
+    let urlCount = 1;
+
+    // Update the generated URL whenever form values change
+    function updateGeneratedUrl() {
+      const baseUrl = 'https://voicehelper.io/opener.html';
+      const params = new URLSearchParams();
+      
+      let hasValidUrl = false;
+      
+      // Collect URLs and titles
+      const urlEntries = document.querySelectorAll('.url-entry');
+      urlEntries.forEach((entry, index) => {
+        const urlInput = entry.querySelector(`#url${index}`);
+        const titleInput = entry.querySelector(`#title${index}`);
+        
+        if (urlInput && urlInput.value.trim()) {
+          hasValidUrl = true;
+          if (index === 0) {
+            params.append('url', urlInput.value.trim());
+            if (titleInput && titleInput.value.trim()) {
+              params.append('title', titleInput.value.trim());
+            }
+          } else {
+            params.append(`url${index + 1}`, urlInput.value.trim());
+            if (titleInput && titleInput.value.trim()) {
+              params.append(`title${index + 1}`, titleInput.value.trim());
+            }
+          }
+        }
+      });
+      
+      // Add other parameters
+      const width = document.getElementById('width').value;
+      const height = document.getElementById('height').value;
+      const image = document.getElementById('image').value;
+      const hideurl = document.getElementById('hideurl').checked;
+      
+      if (width) params.append('width', width);
+      if (height) params.append('height', height);
+      if (image) params.append('image', image);
+      if (hideurl) params.append('hideurl', 'true');
+      
+      const generatedUrlElement = document.getElementById('generatedUrl');
+      
+      if (hasValidUrl) {
+        const fullUrl = `${baseUrl}?${params.toString()}`;
+        generatedUrlElement.textContent = fullUrl;
+      } else {
+        generatedUrlElement.textContent = 'Enter at least one URL to generate the opener URL...';
+      }
+    }
+
+    function addUrlField() {
+      const container = document.getElementById('urlContainer');
+      const newIndex = urlCount;
+      
+      const urlEntry = document.createElement('div');
+      urlEntry.className = 'url-entry';
+      urlEntry.setAttribute('data-index', newIndex);
+      
+      urlEntry.innerHTML = `
+        <h4>URL ${newIndex + 1}</h4>
+        <div class="url-fields">
+          <div class="form-group">
+            <label for="url${newIndex}">URL *</label>
+            <input type="url" id="url${newIndex}" placeholder="https://example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="title${newIndex}">Title</label>
+            <input type="text" id="title${newIndex}" placeholder="Optional title">
+          </div>
+          <button type="button" class="remove-btn" onclick="removeUrlField(${newIndex})">Remove</button>
+        </div>
+      `;
+      
+      container.appendChild(urlEntry);
+      urlCount++;
+      
+      // Add event listeners to new inputs
+      const urlInput = urlEntry.querySelector(`#url${newIndex}`);
+      const titleInput = urlEntry.querySelector(`#title${newIndex}`);
+      
+      urlInput.addEventListener('input', updateGeneratedUrl);
+      titleInput.addEventListener('input', updateGeneratedUrl);
+      
+      updateGeneratedUrl();
+    }
+
+    function removeUrlField(index) {
+      const entry = document.querySelector(`[data-index="${index}"]`);
+      if (entry) {
+        entry.remove();
+        updateGeneratedUrl();
+      }
+    }
+
+    async function copyToClipboard() {
+      const generatedUrl = document.getElementById('generatedUrl').textContent;
+      
+      if (generatedUrl.includes('Enter at least one URL')) {
+        return;
+      }
+      
+      try {
+        await navigator.clipboard.writeText(generatedUrl);
+        const successElement = document.getElementById('copySuccess');
+        successElement.classList.add('show');
+        setTimeout(() => {
+          successElement.classList.remove('show');
+        }, 2000);
+      } catch (err) {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = generatedUrl;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        const successElement = document.getElementById('copySuccess');
+        successElement.classList.add('show');
+        setTimeout(() => {
+          successElement.classList.remove('show');
+        }, 2000);
+      }
+    }
+
+    // Initialize event listeners
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add event listeners to initial form elements
+      document.getElementById('url0').addEventListener('input', updateGeneratedUrl);
+      document.getElementById('title0').addEventListener('input', updateGeneratedUrl);
+      document.getElementById('width').addEventListener('input', updateGeneratedUrl);
+      document.getElementById('height').addEventListener('input', updateGeneratedUrl);
+      document.getElementById('image').addEventListener('input', updateGeneratedUrl);
+      document.getElementById('hideurl').addEventListener('change', updateGeneratedUrl);
+      
+      // Initial URL generation
+      updateGeneratedUrl();
+    });
+  </script>
+</body>
+</html>
