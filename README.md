@@ -216,6 +216,119 @@ The multiple URL selection feature is particularly useful for DMO integration wh
 2. Say "select 2" or "välj 3" to choose from multiple medical databases
 3. Have immediate access to their chosen resource without manual navigation
 
+## Step-by-Step Command Examples for DMO
+
+This section provides detailed instructions for creating Dragon Medical One step-by-step commands that utilize VoiceHelper's opener and redirector utilities. These examples serve as templates and inspiration for building your own voice-enabled workflows.
+
+### Example 1: Single Website Redirect Command
+
+**Command Name:** "Open UpToDate"
+
+**Purpose:** Quickly open UpToDate medical database
+
+**Step-by-step instructions:**
+1. Create a new step-by-step command "Open UpToDate"
+2. Add the commands:
+   - **Run program:** `https://voicehelper.io/opener.html?url=https://www.uptodate.com`
+   - **Wait:** 2000 ms (to allow the browser to load and redirect)
+
+**Usage:** Say "Open UpToDate" and the medical database opens immediately.
+
+### Example 2: Multiple Database Selection Command
+
+**Command Name:** "Medical Databases"
+
+**Purpose:** Present a voice-controlled selection menu of multiple medical databases
+
+**Step-by-step instructions:**
+1. Create a new step-by-step command "Medical Databases"
+2. Add the commands:
+   - **Run program:** `https://voicehelper.io/opener.html?url=https://www.uptodate.com&url2=https://www.medscape.com&url3=https://emedicine.medscape.com&title=UpToDate&title2=Medscape&title3=eMedicine&hideurl=true`
+   - **Wait:** 3000 ms (to allow the selection interface to load)
+
+**Usage:** 
+- Say "Medical Databases" to open the selection interface
+- Say "select 1", "two", or "choose three" to pick your desired database
+- The selected database opens automatically
+
+### Example 3: Search Command with Opener Integration
+
+**Command Name:** "Search Medical Database"
+
+**Purpose:** Select text, choose from multiple databases, and search immediately
+
+**Step-by-step instructions:**
+1. Create a new step-by-step command "Search Medical Database"
+2. Add the commands:
+   - **Keyboard shortcut:** Ctrl-C (copy selected text)
+   - **Run program:** `https://voicehelper.io/opener.html?url=https://voicehelper.io/?site=u2d&url2=https://voicehelper.io/?site=ms&url3=https://voicehelper.io/?site=mdc&title=UpToDate&title2=Medscape&title3=MD%20Calc&hideurl=true&image=https://voicehelper.io/logo/SVG/logo.svg`
+   - **Wait:** 3000 ms (to allow selection interface to load)
+
+**Usage:**
+- Select text in any application
+- Say "Search Medical Database"
+- Say "select 1" to search UpToDate, "two" for Medscape, or "three" for MD Calc
+- The selected database opens with search results for your selected text
+
+### Example 4: Direct Redirector Command
+
+**Command Name:** "Quick PubMed"
+
+**Purpose:** Directly redirect to PubMed search page positioned on the right side of screen
+
+**Step-by-step instructions:**
+1. Create a new step-by-step command "Quick PubMed"
+2. Add the commands:
+   - **Run program:** `https://voicehelper.io/redirector.html?url=https://pubmed.ncbi.nlm.nih.gov&width=800&height=600`
+   - **Wait:** 1500 ms (brief wait for positioning and redirect)
+
+**Usage:** Say "Quick PubMed" and PubMed opens in an 800x600 window positioned on the right edge of your screen.
+
+### Example 5: Advanced Multi-Language Search Command
+
+**Command Name:** "International Medical Search"
+
+**Purpose:** Copy text and search across international medical databases with language options
+
+**Step-by-step instructions:**
+1. Create a new step-by-step command "International Medical Search"
+2. Add the commands:
+   - **Keyboard shortcut:** Ctrl-C (copy selected text)
+   - **Run program:** `https://voicehelper.io/opener.html?url=https://voicehelper.io/?site=u2d&lang=en&url2=https://voicehelper.io/?site=has&lang=fr&url3=https://voicehelper.io/?site=im&lang=sv&title=UpToDate%20(English)&title2=HAS%20(French)&title3=Internetmedicin%20(Swedish)&hideurl=true`
+   - **Wait:** 3000 ms (to allow selection interface to load)
+
+**Usage:**
+- Select medical text in any language
+- Say "International Medical Search"
+- Say "one" for English UpToDate, "two" for French HAS, or "three" for Swedish Internetmedicin
+- Text is automatically translated and searched in the selected database
+
+### Tips for Creating Effective Commands
+
+1. **Wait Times:** Adjust wait times based on your internet speed and system performance
+   - Fast connections: 1500-2000 ms
+   - Slower connections: 3000-4000 ms
+
+2. **URL Encoding:** When including special characters in titles or URLs, use URL encoding:
+   - Space: `%20`
+   - Ampersand: `%26`
+   - Question mark: `%3F`
+
+3. **Voice Commands:** Test voice commands with both English and Swedish phrases:
+   - English: "select", "choose", "number", "one", "two", "three"
+   - Swedish: "välj", "ett", "två", "tre"
+
+4. **Window Positioning:** Use width and height parameters to position windows optimally:
+   - Small reference window: `width=400&height=600`
+   - Standard window: `width=800&height=600`
+   - Full height: omit height parameter
+
+5. **Error Handling:** If commands fail:
+   - Increase wait times
+   - Check URL encoding
+   - Verify all URLs are accessible
+   - Test with simpler commands first
+
 ## Examples
 
 Here are two examples of valid url parameters both querying Google:
