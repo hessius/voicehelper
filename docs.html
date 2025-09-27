@@ -1176,6 +1176,7 @@
             </ol>
           </li>
           <li><a href="#utility-files">Utility Files</a></li>
+          <li><a href="#step-by-step-command-examples">Step-by-Step Command Examples for DMO</a></li>
           <li><a href="#examples">Examples</a></li>
           <li><a href="#logo">Logo</a></li>
           <li><a href="#contact--issues">Contact / Issues</a></li>
@@ -1565,6 +1566,133 @@
       <li>Say "opener medical databases" to open the selection interface</li>
       <li>Say "select 2" or "välj 3" to choose from multiple medical databases</li>
       <li>Have immediate access to their chosen resource without manual navigation</li>
+    </ol>
+    
+    <h2 id="step-by-step-command-examples">Step-by-Step Command Examples for DMO</h2>
+    <p>
+      This section provides detailed instructions for creating Dragon Medical One step-by-step 
+      commands that utilize VoiceHelper's opener and redirector utilities. These examples serve 
+      as templates and inspiration for building your own voice-enabled workflows.
+    </p>
+    
+    <h3>Example 1: Single Website Redirect Command</h3>
+    <p><strong>Command Name:</strong> "Open UpToDate"</p>
+    <p><strong>Purpose:</strong> Quickly open UpToDate medical database</p>
+    <p><strong>Step-by-step instructions:</strong></p>
+    <ol>
+      <li>Create a new step-by-step command "Open UpToDate"</li>
+      <li>Add the commands:
+        <ul>
+          <li><strong>Run program:</strong> <code>https://voicehelper.io/opener.html?url=https://www.uptodate.com</code></li>
+        </ul>
+      </li>
+    </ol>
+    <p><strong>Usage:</strong> Say "Open UpToDate" and the medical database opens immediately.</p>
+
+    <h3>Example 2: Multiple Database Selection Command</h3>
+    <p><strong>Command Name:</strong> "Medical Databases"</p>
+    <p><strong>Purpose:</strong> Present a voice-controlled selection menu of multiple medical databases</p>
+    <p><strong>Step-by-step instructions:</strong></p>
+    <ol>
+      <li>Create a new step-by-step command "Medical Databases"</li>
+      <li>Add the commands:
+        <ul>
+          <li><strong>Run program:</strong> <code>https://voicehelper.io/opener.html?url=https://www.uptodate.com&amp;url2=https://www.medscape.com&amp;url3=https://emedicine.medscape.com&amp;title=UpToDate&amp;title2=Medscape&amp;title3=eMedicine&amp;hideurl=true</code></li>
+        </ul>
+      </li>
+    </ol>
+    <p><strong>Usage:</strong></p>
+    <ul>
+      <li>Say "Medical Databases" to open the selection interface</li>
+      <li>Say "select 1", "two", or "choose three" to pick your desired database</li>
+      <li>The selected database opens automatically</li>
+    </ul>
+
+    <h3>Example 3: Search Command with Opener Integration</h3>
+    <p><strong>Command Name:</strong> "Search Medical Database"</p>
+    <p><strong>Purpose:</strong> Select text, choose from multiple databases, and search immediately</p>
+    <p><strong>Step-by-step instructions:</strong></p>
+    <ol>
+      <li>Create a new step-by-step command "Search Medical Database"</li>
+      <li>Add the commands:
+        <ul>
+          <li><strong>Keyboard shortcut:</strong> Ctrl-C (copy selected text)</li>
+          <li><strong>Run program:</strong> <code>https://voicehelper.io/opener.html?url=https://voicehelper.io/?site=u2d&amp;url2=https://voicehelper.io/?site=ms&amp;url3=https://voicehelper.io/?site=mdc&amp;title=UpToDate&amp;title2=Medscape&amp;title3=MD%20Calc&amp;hideurl=true&amp;image=https://voicehelper.io/logo/SVG/logo.svg</code></li>
+        </ul>
+      </li>
+    </ol>
+    <p><strong>Usage:</strong></p>
+    <ul>
+      <li>Select text in any application</li>
+      <li>Say "Search Medical Database"</li>
+      <li>Say "select 1" to search UpToDate, "two" for Medscape, or "three" for MD Calc</li>
+      <li>The selected database opens with search results for your selected text</li>
+    </ul>
+
+    <h3>Example 4: Direct Redirector Command</h3>
+    <p><strong>Command Name:</strong> "Quick PubMed"</p>
+    <p><strong>Purpose:</strong> Directly redirect to PubMed search page positioned on the right side of screen</p>
+    <p><strong>Step-by-step instructions:</strong></p>
+    <ol>
+      <li>Create a new step-by-step command "Quick PubMed"</li>
+      <li>Add the commands:
+        <ul>
+          <li><strong>Run program:</strong> <code>https://voicehelper.io/redirector.html?url=https://pubmed.ncbi.nlm.nih.gov&amp;width=800&amp;height=600</code></li>
+        </ul>
+      </li>
+    </ol>
+    <p><strong>Usage:</strong> Say "Quick PubMed" and PubMed opens in an 800x600 window positioned on the right edge of your screen.</p>
+
+    <h3>Example 5: Advanced Multi-Language Search Command</h3>
+    <p><strong>Command Name:</strong> "International Medical Search"</p>
+    <p><strong>Purpose:</strong> Copy text and search across international medical databases with language options</p>
+    <p><strong>Step-by-step instructions:</strong></p>
+    <ol>
+      <li>Create a new step-by-step command "International Medical Search"</li>
+      <li>Add the commands:
+        <ul>
+          <li><strong>Keyboard shortcut:</strong> Ctrl-C (copy selected text)</li>
+          <li><strong>Run program:</strong> <code>https://voicehelper.io/opener.html?url=https://voicehelper.io/?site=u2d&amp;lang=en&amp;url2=https://voicehelper.io/?site=has&amp;lang=fr&amp;url3=https://voicehelper.io/?site=im&amp;lang=sv&amp;title=UpToDate%20(English)&amp;title2=HAS%20(French)&amp;title3=Internetmedicin%20(Swedish)&amp;hideurl=true</code></li>
+        </ul>
+      </li>
+    </ol>
+    <p><strong>Usage:</strong></p>
+    <ul>
+      <li>Select medical text in any language</li>
+      <li>Say "International Medical Search"</li>
+      <li>Say "one" for English UpToDate, "two" for French HAS, or "three" for Swedish Internetmedicin</li>
+      <li>Text is automatically translated and searched in the selected database</li>
+    </ul>
+
+    <h3>Tips for Creating Effective Commands</h3>
+    <ol>
+      <li><strong>URL Encoding:</strong> When including special characters in titles or URLs, use URL encoding:
+        <ul>
+          <li>Space: <code>%20</code></li>
+          <li>Ampersand: <code>%26</code></li>
+          <li>Question mark: <code>%3F</code></li>
+        </ul>
+      </li>
+      <li><strong>Voice Commands:</strong> Test voice commands with both English and Swedish phrases:
+        <ul>
+          <li>English: "select", "choose", "number", "one", "two", "three"</li>
+          <li>Swedish: "välj", "ett", "två", "tre"</li>
+        </ul>
+      </li>
+      <li><strong>Window Positioning:</strong> Use width and height parameters to position windows optimally:
+        <ul>
+          <li>Small reference window: <code>width=400&amp;height=600</code></li>
+          <li>Standard window: <code>width=800&amp;height=600</code></li>
+          <li>Full height: omit height parameter</li>
+        </ul>
+      </li>
+      <li><strong>Error Handling:</strong> If commands fail:
+        <ul>
+          <li>Check URL encoding</li>
+          <li>Verify all URLs are accessible</li>
+          <li>Test with simpler commands first</li>
+        </ul>
+      </li>
     </ol>
     <h2 id="examples">Examples</h2>
     <p>Here are two examples of valid url parameters both querying Google:</p>
