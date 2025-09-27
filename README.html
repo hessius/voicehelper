@@ -299,7 +299,6 @@ The structure of the predefined domains is as follows:</p>
 <li>Add the commands:
 <ul>
 <li><strong>Run program:</strong> <code>https://voicehelper.io/opener.html?url=https://www.uptodate.com</code></li>
-<li><strong>Wait:</strong> 2000 ms (to allow the browser to load and redirect)</li>
 </ul>
 </li>
 </ol>
@@ -313,7 +312,6 @@ The structure of the predefined domains is as follows:</p>
 <li>Add the commands:
 <ul>
 <li><strong>Run program:</strong> <code>https://voicehelper.io/opener.html?url=https://www.uptodate.com&amp;url2=https://www.medscape.com&amp;url3=https://emedicine.medscape.com&amp;title=UpToDate&amp;title2=Medscape&amp;title3=eMedicine&amp;hideurl=true</code></li>
-<li><strong>Wait:</strong> 3000 ms (to allow the selection interface to load)</li>
 </ul>
 </li>
 </ol>
@@ -333,7 +331,6 @@ The structure of the predefined domains is as follows:</p>
 <ul>
 <li><strong>Keyboard shortcut:</strong> Ctrl-C (copy selected text)</li>
 <li><strong>Run program:</strong> <code>https://voicehelper.io/opener.html?url=https://voicehelper.io/?site=u2d&amp;url2=https://voicehelper.io/?site=ms&amp;url3=https://voicehelper.io/?site=mdc&amp;title=UpToDate&amp;title2=Medscape&amp;title3=MD%20Calc&amp;hideurl=true&amp;image=https://voicehelper.io/logo/SVG/logo.svg</code></li>
-<li><strong>Wait:</strong> 3000 ms (to allow selection interface to load)</li>
 </ul>
 </li>
 </ol>
@@ -353,7 +350,6 @@ The structure of the predefined domains is as follows:</p>
 <li>Add the commands:
 <ul>
 <li><strong>Run program:</strong> <code>https://voicehelper.io/redirector.html?url=https://pubmed.ncbi.nlm.nih.gov&amp;width=800&amp;height=600</code></li>
-<li><strong>Wait:</strong> 1500 ms (brief wait for positioning and redirect)</li>
 </ul>
 </li>
 </ol>
@@ -368,7 +364,6 @@ The structure of the predefined domains is as follows:</p>
 <ul>
 <li><strong>Keyboard shortcut:</strong> Ctrl-C (copy selected text)</li>
 <li><strong>Run program:</strong> <code>https://voicehelper.io/opener.html?url=https://voicehelper.io/?site=u2d&amp;lang=en&amp;url2=https://voicehelper.io/?site=has&amp;lang=fr&amp;url3=https://voicehelper.io/?site=im&amp;lang=sv&amp;title=UpToDate%20(English)&amp;title2=HAS%20(French)&amp;title3=Internetmedicin%20(Swedish)&amp;hideurl=true</code></li>
-<li><strong>Wait:</strong> 3000 ms (to allow selection interface to load)</li>
 </ul>
 </li>
 </ol>
@@ -381,12 +376,6 @@ The structure of the predefined domains is as follows:</p>
 </ul>
 <h3>Tips for Creating Effective Commands</h3>
 <ol>
-<li><strong>Wait Times:</strong> Adjust wait times based on your internet speed and system performance
-<ul>
-<li>Fast connections: 1500-2000 ms</li>
-<li>Slower connections: 3000-4000 ms</li>
-</ul>
-</li>
 <li><strong>URL Encoding:</strong> When including special characters in titles or URLs, use URL encoding:
 <ul>
 <li>Space: <code>%20</code></li>
@@ -409,7 +398,6 @@ The structure of the predefined domains is as follows:</p>
 </li>
 <li><strong>Error Handling:</strong> If commands fail:
 <ul>
-<li>Increase wait times</li>
 <li>Check URL encoding</li>
 <li>Verify all URLs are accessible</li>
 <li>Test with simpler commands first</li>

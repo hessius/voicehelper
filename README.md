@@ -230,7 +230,6 @@ This section provides detailed instructions for creating Dragon Medical One step
 1. Create a new step-by-step command "Open UpToDate"
 2. Add the commands:
    - **Run program:** `https://voicehelper.io/opener.html?url=https://www.uptodate.com`
-   - **Wait:** 2000 ms (to allow the browser to load and redirect)
 
 **Usage:** Say "Open UpToDate" and the medical database opens immediately.
 
@@ -244,7 +243,6 @@ This section provides detailed instructions for creating Dragon Medical One step
 1. Create a new step-by-step command "Medical Databases"
 2. Add the commands:
    - **Run program:** `https://voicehelper.io/opener.html?url=https://www.uptodate.com&url2=https://www.medscape.com&url3=https://emedicine.medscape.com&title=UpToDate&title2=Medscape&title3=eMedicine&hideurl=true`
-   - **Wait:** 3000 ms (to allow the selection interface to load)
 
 **Usage:** 
 - Say "Medical Databases" to open the selection interface
@@ -262,7 +260,6 @@ This section provides detailed instructions for creating Dragon Medical One step
 2. Add the commands:
    - **Keyboard shortcut:** Ctrl-C (copy selected text)
    - **Run program:** `https://voicehelper.io/opener.html?url=https://voicehelper.io/?site=u2d&url2=https://voicehelper.io/?site=ms&url3=https://voicehelper.io/?site=mdc&title=UpToDate&title2=Medscape&title3=MD%20Calc&hideurl=true&image=https://voicehelper.io/logo/SVG/logo.svg`
-   - **Wait:** 3000 ms (to allow selection interface to load)
 
 **Usage:**
 - Select text in any application
@@ -280,7 +277,6 @@ This section provides detailed instructions for creating Dragon Medical One step
 1. Create a new step-by-step command "Quick PubMed"
 2. Add the commands:
    - **Run program:** `https://voicehelper.io/redirector.html?url=https://pubmed.ncbi.nlm.nih.gov&width=800&height=600`
-   - **Wait:** 1500 ms (brief wait for positioning and redirect)
 
 **Usage:** Say "Quick PubMed" and PubMed opens in an 800x600 window positioned on the right edge of your screen.
 
@@ -295,7 +291,6 @@ This section provides detailed instructions for creating Dragon Medical One step
 2. Add the commands:
    - **Keyboard shortcut:** Ctrl-C (copy selected text)
    - **Run program:** `https://voicehelper.io/opener.html?url=https://voicehelper.io/?site=u2d&lang=en&url2=https://voicehelper.io/?site=has&lang=fr&url3=https://voicehelper.io/?site=im&lang=sv&title=UpToDate%20(English)&title2=HAS%20(French)&title3=Internetmedicin%20(Swedish)&hideurl=true`
-   - **Wait:** 3000 ms (to allow selection interface to load)
 
 **Usage:**
 - Select medical text in any language
@@ -305,26 +300,21 @@ This section provides detailed instructions for creating Dragon Medical One step
 
 ### Tips for Creating Effective Commands
 
-1. **Wait Times:** Adjust wait times based on your internet speed and system performance
-   - Fast connections: 1500-2000 ms
-   - Slower connections: 3000-4000 ms
-
-2. **URL Encoding:** When including special characters in titles or URLs, use URL encoding:
+1. **URL Encoding:** When including special characters in titles or URLs, use URL encoding:
    - Space: `%20`
    - Ampersand: `%26`
    - Question mark: `%3F`
 
-3. **Voice Commands:** Test voice commands with both English and Swedish phrases:
+2. **Voice Commands:** Test voice commands with both English and Swedish phrases:
    - English: "select", "choose", "number", "one", "two", "three"
    - Swedish: "välj", "ett", "två", "tre"
 
-4. **Window Positioning:** Use width and height parameters to position windows optimally:
+3. **Window Positioning:** Use width and height parameters to position windows optimally:
    - Small reference window: `width=400&height=600`
    - Standard window: `width=800&height=600`
    - Full height: omit height parameter
 
-5. **Error Handling:** If commands fail:
-   - Increase wait times
+4. **Error Handling:** If commands fail:
    - Check URL encoding
    - Verify all URLs are accessible
    - Test with simpler commands first
